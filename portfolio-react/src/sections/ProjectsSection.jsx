@@ -1,20 +1,94 @@
 // src/sections/ProjectsSection.jsx
-import { useState, useEffect } from 'react'
-import projects from '../data/projects'
+import { useState, useEffect, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
 const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all')
-  const [filteredProjects, setFilteredProjects] = useState(projects)
   const [hoveredProject, setHoveredProject] = useState(null)
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px 0px" })
+  
+  // Projets fictifs basés sur les compétences
+  const projects = [
+    {
+      id: 1,
+      title: "Portfolio Personnel",
+      description: "Ce portfolio moderne et interactif, créé avec React, Vite et Tailwind CSS, présente mes compétences, projets et parcours professionnel.",
+      image: "/assets/images/projects/portfolio.jpg",
+      technologies: ["React", "Tailwind CSS", "Vite", "Framer Motion"],
+      category: "frontend",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/portfolio",
+      liveLink: "#",
+      featured: true
+    },
+    {
+      id: 2,
+      title: "Application Météo",
+      description: "Application météo interactive utilisant l'API OpenWeatherMap pour fournir des prévisions météorologiques en temps réel avec une interface utilisateur intuitive.",
+      image: "/assets/images/projects/weather-app.jpg",
+      technologies: ["React", "Tailwind CSS", "API REST", "Chart.js"],
+      category: "frontend",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/weather-app",
+      liveLink: "#",
+      featured: true
+    },
+    {
+      id: 3,
+      title: "Gestionnaire de Tâches",
+      description: "Application de gestion de tâches avec fonctionnalités de drag-and-drop permettant aux utilisateurs d'organiser leurs tâches par statut et priorité.",
+      image: "/assets/images/projects/task-manager.jpg",
+      technologies: ["React", "Node.js", "Express", "MongoDB"],
+      category: "fullstack",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/task-manager",
+      liveLink: "#",
+      featured: true
+    },
+    {
+      id: 4,
+      title: "Blog personnel",
+      description: "Plateforme de blog avec système d'authentification, édition de contenu en markdown et fonctionnalités de commentaires.",
+      image: "/assets/images/projects/blog.jpg",
+      technologies: ["React", "Node.js", "MongoDB", "Express"],
+      category: "fullstack",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/blog-platform",
+      liveLink: "#",
+      featured: false
+    },
+    {
+      id: 5,
+      title: "Dashboard Admin",
+      description: "Interface d'administration avec visualisations de données, gestion des utilisateurs et tableaux de bord interactifs.",
+      image: "/assets/images/projects/dashboard.jpg",
+      technologies: ["React", "Tailwind CSS", "Chart.js", "Context API"],
+      category: "frontend",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/admin-dashboard",
+      liveLink: "#",
+      featured: false
+    },
+    {
+      id: 6,
+      title: "API de Commerce Électronique",
+      description: "API RESTful pour une application de commerce électronique, avec gestion des produits, commandes et utilisateurs.",
+      image: "/assets/images/projects/ecommerce-api.jpg",
+      technologies: ["Node.js", "Express", "MongoDB", "JWT"],
+      category: "backend",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/ecommerce-api",
+      liveLink: "#",
+      featured: false
+    }
+  ]
   
   // Catégories de projets
   const categories = [
     { id: 'all', label: 'Tous' },
     { id: 'frontend', label: 'Frontend' },
+    { id: 'backend', label: 'Backend' },
     { id: 'fullstack', label: 'Fullstack' },
   ]
   
   // Filtrer les projets en fonction de la catégorie active
+  const [filteredProjects, setFilteredProjects] = useState(projects)
+  
   useEffect(() => {
     if (activeCategory === 'all') {
       setFilteredProjects(projects)
@@ -23,38 +97,71 @@ const ProjectsSection = () => {
     }
   }, [activeCategory])
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
+  
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  }
+
   return (
-    <section id="projects" className="py-20 bg-secondary-50 dark:bg-secondary-900">
+    <section id="projects" className="py-20 bg-secondary-50 dark:bg-secondary-900" ref={sectionRef}>
       <div className="section-container">
         <h2 className="section-title mb-12 text-center">Mes projets</h2>
         
         {/* Catégories */}
-        <div className="flex flex-wrap justify-center mb-12 animate-on-scroll">
-          <div className="bg-white dark:bg-secondary-800 shadow-md rounded-full p-1 inline-flex">
+        <motion.div 
+          className="flex flex-wrap justify-center mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="bg-white dark:bg-secondary-800 shadow-md rounded-full p-1 inline-flex flex-wrap justify-center">
             {categories.map((category) => (
-              <button
+              <motion.button
                 key={category.id}
-                className={`px-4 py-2 text-sm font-medium rounded-full transition-all ${
+                className={`px-4 py-2 text-sm font-medium rounded-full transition-all m-1 ${
                   activeCategory === category.id
                     ? 'bg-primary-500 text-white shadow-md'
                     : 'text-secondary-600 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-700'
                 }`}
                 onClick={() => setActiveCategory(category.id)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {category.label}
-              </button>
+              </motion.button>
             ))}
           </div>
-        </div>
+        </motion.div>
         
         {/* Projets */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-animation">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {filteredProjects.map((project) => (
-            <div 
+            <motion.div 
               key={project.id}
               className="group relative rounded-xl overflow-hidden shadow-lg bg-white dark:bg-secondary-800 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
+              variants={itemVariants}
             >
               {/* Image du projet */}
               <div className="relative h-48 overflow-hidden">
@@ -160,14 +267,19 @@ const ProjectsSection = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
         
         {/* Voir plus de projets */}
-        <div className="text-center mt-12">
+        <motion.div 
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
           <a
-            href="https://github.com/username"
+            href="https://github.com/MOUHAMEDBOUZAYAN"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 bg-secondary-800 dark:bg-secondary-700 text-white rounded-full font-medium hover:bg-secondary-700 dark:hover:bg-secondary-600 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
@@ -181,7 +293,7 @@ const ProjectsSection = () => {
             </svg>
             Voir plus de projets sur GitHub
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
