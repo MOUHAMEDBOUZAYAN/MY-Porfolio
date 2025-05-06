@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useTheme } from '../context/ThemeContext'
 import { useScrollPosition } from '../hooks/useScrollPosition'
 import ThemeToggle from './ThemeToggle'
+import React from 'react'
 
 const Navbar = () => {
   const { isScrolled } = useScrollPosition()

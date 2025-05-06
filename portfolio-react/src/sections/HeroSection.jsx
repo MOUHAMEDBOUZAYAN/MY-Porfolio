@@ -1,6 +1,7 @@
 // src/sections/HeroSection.jsx
 import { useEffect, useRef } from 'react'
 import { TypeAnimation } from 'react-type-animation'
+import profile from '../assets/images/profile.png'
 
 const HeroSection = () => {
   const sectionRef = useRef(null)
@@ -95,7 +96,7 @@ const HeroSection = () => {
           <div className="relative animate-on-scroll">
             <div className="w-72 h-72 md:w-96 md:h-96 bg-white dark:bg-secondary-800 rounded-full shadow-xl flex items-center justify-center overflow-hidden">
               <img
-                src="/assets/images/profile.png"
+                src={profile}
                 alt="Photo de Mouhamed Bouzyane"
                 className="w-full h-full object-cover"
               />
