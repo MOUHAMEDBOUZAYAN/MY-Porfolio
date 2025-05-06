@@ -2,57 +2,57 @@
 import { useState } from 'react'
 
 const AboutSection = () => {
-  const [activeTab, setActiveTab] = useState('experience')
+  const [activeTab, setActiveTab] = useState('education')
   
   // Données pour les onglets
   const tabs = [
-    { id: 'experience', label: 'Expérience' },
     { id: 'education', label: 'Formation' },
+    { id: 'experience', label: 'Expérience' },
     { id: 'certifications', label: 'Certifications' },
   ]
   
   // Contenu des onglets
   const tabContents = {
-    experience: [
-      {
-        title: 'Développeur Frontend React',
-        company: 'Entreprise XYZ',
-        period: '2023 - Présent',
-        description: 'Développement d\'applications web modernes avec React et Tailwind CSS. Travail en équipe selon la méthode Agile/Scrum. Optimisation des performances et maintenance du code.',
-      },
-      {
-        title: 'Développeur Web Junior',
-        company: 'Startup ABC',
-        period: '2021 - 2023',
-        description: 'Création de sites vitrines et e-commerce avec HTML, CSS, JavaScript et WordPress. Collaboration avec les designers pour implémenter des maquettes fidèlement.',
-      },
-    ],
     education: [
       {
-        degree: 'Master en Développement Web',
-        institution: 'École Supérieure du Digital',
-        period: '2019 - 2021',
-        description: 'Spécialisation en développement frontend et technologies JavaScript modernes. Projet de fin d\'études sur l\'accessibilité web.',
+        degree: 'Formation JavaScript',
+        institution: 'École Numérique Ahmed El Hansali (Partenariat avec Simplon)',
+        period: '2023 - En cours',
+        description: 'Formation intensive en développement web avec spécialisation JavaScript et React. Apprentissage des pratiques modernes de développement et réalisation de projets concrets.',
       },
       {
-        degree: 'Licence en Informatique',
-        institution: 'Université de Paris',
-        period: '2016 - 2019',
-        description: 'Formation généraliste en informatique avec introduction aux algorithmes, bases de données, et développement web.',
+        degree: 'Deug en Biologie, chimie, géologie',
+        institution: 'Faculté des sciences et des techniques, Beni Mellal',
+        period: '2022 - 2024',
+        description: 'Formation scientifique pluridisciplinaire, développant rigueur analytique et méthodologie de résolution de problèmes complexes.',
+      },
+      {
+        degree: 'Baccalauréat en Science Physique',
+        institution: 'Lycée Moulay Rchid, Kasbat-Tadla',
+        period: '2021 - 2022',
+        description: 'Formation scientifique avec spécialisation en physique, menant à l\'acquisition de compétences analytiques et mathématiques.',
+      },
+    ],
+    experience: [
+      {
+        title: 'Développeur Front-end Junior',
+        company: 'Projet personnel de portfolio',
+        period: '2023 - Présent',
+        description: 'Création d\'un portfolio personnel en utilisant React, Tailwind CSS et des animations modernes pour mettre en valeur mes compétences et projets.',
+      },
+      {
+        title: 'Développeur Web Stagiaire',
+        company: 'Formation pratique',
+        period: '2023',
+        description: 'Développement de projets Web dans le cadre de la formation. Implémentation de fonctionnalités front-end et back-end avec des technologies modernes.',
       },
     ],
     certifications: [
       {
-        name: 'Meta React Developer',
-        issuer: 'Meta',
-        date: '2023',
-        description: 'Certification officielle validant les compétences avancées en développement React.',
-      },
-      {
-        name: 'JavaScript Algorithms and Data Structures',
-        issuer: 'freeCodeCamp',
-        date: '2022',
-        description: 'Maîtrise des algorithmes et structures de données en JavaScript.',
+        name: 'Formation JavaScript & React',
+        issuer: 'École Numérique Ahmed El Hansali',
+        date: '2023 - En cours',
+        description: 'Certification en cours dans le développement d\'applications web modernes avec JavaScript, React et Node.js.',
       },
     ],
   }
@@ -68,7 +68,7 @@ const AboutSection = () => {
             <div className="relative mb-8 rounded-2xl overflow-hidden shadow-xl">
               <img 
                 src="/assets/images/about-me.jpg" 
-                alt="Photo personnelle" 
+                alt="Photo de Mouhamed Bouzyane" 
                 className="w-full h-auto"
               />
               
@@ -83,10 +83,10 @@ const AboutSection = () => {
             
             <div className="prose dark:prose-invert max-w-none">
               <p className="text-lg text-secondary-700 dark:text-secondary-300">
-                Développeur passionné avec plus de 3 ans d'expérience dans la création d'applications web modernes et réactives. Spécialisé en <span className="text-primary-600 dark:text-primary-400 font-medium">React</span>, <span className="text-primary-600 dark:text-primary-400 font-medium">Tailwind CSS</span> et technologies frontend.
+                Actuellement en formation JavaScript à l'École Numérique Ahmed El Hansali, je suis passionné par le développement web et les technologies modernes. Je me spécialise en <span className="text-primary-600 dark:text-primary-400 font-medium">HTML/CSS</span>, <span className="text-primary-600 dark:text-primary-400 font-medium">JavaScript</span>, <span className="text-primary-600 dark:text-primary-400 font-medium">React</span> et <span className="text-primary-600 dark:text-primary-400 font-medium">Tailwind CSS</span>.
               </p>
               <p className="text-secondary-600 dark:text-secondary-400">
-                J'aime résoudre des problèmes complexes et transformer des concepts en interfaces utilisateur élégantes et fonctionnelles. Mon approche combine créativité technique et attention aux détails pour créer des expériences web exceptionnelles.
+                Mon parcours académique en sciences m'a doté d'une approche analytique et d'une rigueur méthodologique que j'applique au développement web. Je suis à la recherche d'opportunités pour mettre en pratique mes compétences et contribuer à des projets innovants.
               </p>
             </div>
             
@@ -100,7 +100,7 @@ const AboutSection = () => {
                 </div>
                 <div>
                   <h3 className="text-xs text-secondary-500 dark:text-secondary-400">Email</h3>
-                  <p className="text-secondary-900 dark:text-white">contact@monportfolio.com</p>
+                  <p className="text-secondary-900 dark:text-white">mohammedbouzi177@gmail.com</p>
                 </div>
               </div>
               
@@ -112,7 +112,7 @@ const AboutSection = () => {
                 </div>
                 <div>
                   <h3 className="text-xs text-secondary-500 dark:text-secondary-400">Téléphone</h3>
-                  <p className="text-secondary-900 dark:text-white">+33 6 XX XX XX XX</p>
+                  <p className="text-secondary-900 dark:text-white">+212 690 815 605</p>
                 </div>
               </div>
               
@@ -125,19 +125,23 @@ const AboutSection = () => {
                 </div>
                 <div>
                   <h3 className="text-xs text-secondary-500 dark:text-secondary-400">Localisation</h3>
-                  <p className="text-secondary-900 dark:text-white">Paris, France</p>
+                  <p className="text-secondary-900 dark:text-white">Beni Mellal, Maroc</p>
                 </div>
               </div>
               
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center">
                   <svg className="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xs text-secondary-500 dark:text-secondary-400">Disponibilité</h3>
-                  <p className="text-secondary-900 dark:text-white">Disponible dès maintenant</p>
+                  <h3 className="text-xs text-secondary-500 dark:text-secondary-400">GitHub</h3>
+                  <p className="text-secondary-900 dark:text-white">
+                    <a href="https://github.com/MOUHAMEDBOUZAYAN" target="_blank" rel="noopener noreferrer" className="hover:text-primary-600 dark:hover:text-primary-400">
+                      MOUHAMEDBOUZAYAN
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -180,28 +184,6 @@ const AboutSection = () => {
               ))}
             </div>
             
-            {/* Tab content - Experience */}
-            <div className={`space-y-6 ${activeTab === 'experience' ? 'block' : 'hidden'}`}>
-              {tabContents.experience.map((item, index) => (
-                <div key={index} className="relative pl-8 pb-6 stagger-animation">
-                  {/* Vertical line */}
-                  {index !== tabContents.experience.length - 1 && (
-                    <div className="absolute top-0 bottom-0 left-3 w-px bg-primary-200 dark:bg-primary-800/50"></div>
-                  )}
-                  
-                  {/* Dot */}
-                  <div className="absolute top-0 left-0 w-6 h-6 rounded-full bg-primary-100 dark:bg-primary-900/30 border-2 border-primary-500 dark:border-primary-600"></div>
-                  
-                  <div className="card">
-                    <h4 className="text-lg font-bold text-secondary-900 dark:text-white">{item.title}</h4>
-                    <p className="text-primary-600 dark:text-primary-400 font-medium">{item.company}</p>
-                    <p className="text-sm text-secondary-500 dark:text-secondary-400 mb-3">{item.period}</p>
-                    <p className="text-secondary-600 dark:text-secondary-300">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
             {/* Tab content - Education */}
             <div className={`space-y-6 ${activeTab === 'education' ? 'block' : 'hidden'}`}>
               {tabContents.education.map((item, index) => (
@@ -217,6 +199,28 @@ const AboutSection = () => {
                   <div className="card">
                     <h4 className="text-lg font-bold text-secondary-900 dark:text-white">{item.degree}</h4>
                     <p className="text-primary-600 dark:text-primary-400 font-medium">{item.institution}</p>
+                    <p className="text-sm text-secondary-500 dark:text-secondary-400 mb-3">{item.period}</p>
+                    <p className="text-secondary-600 dark:text-secondary-300">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Tab content - Experience */}
+            <div className={`space-y-6 ${activeTab === 'experience' ? 'block' : 'hidden'}`}>
+              {tabContents.experience.map((item, index) => (
+                <div key={index} className="relative pl-8 pb-6 stagger-animation">
+                  {/* Vertical line */}
+                  {index !== tabContents.experience.length - 1 && (
+                    <div className="absolute top-0 bottom-0 left-3 w-px bg-primary-200 dark:bg-primary-800/50"></div>
+                  )}
+                  
+                  {/* Dot */}
+                  <div className="absolute top-0 left-0 w-6 h-6 rounded-full bg-primary-100 dark:bg-primary-900/30 border-2 border-primary-500 dark:border-primary-600"></div>
+                  
+                  <div className="card">
+                    <h4 className="text-lg font-bold text-secondary-900 dark:text-white">{item.title}</h4>
+                    <p className="text-primary-600 dark:text-primary-400 font-medium">{item.company}</p>
                     <p className="text-sm text-secondary-500 dark:text-secondary-400 mb-3">{item.period}</p>
                     <p className="text-secondary-600 dark:text-secondary-300">{item.description}</p>
                   </div>
@@ -244,6 +248,10 @@ const AboutSection = () => {
                   </div>
                 </div>
               ))}
+              
+              <div className="pl-8">
+                <p className="text-secondary-600 dark:text-secondary-300 italic">Je suis actuellement en formation et continue à acquérir de nouvelles certifications au fur et à mesure de mon parcours.</p>
+              </div>
             </div>
           </div>
         </div>

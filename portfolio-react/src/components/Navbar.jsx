@@ -41,7 +41,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0 font-display font-bold text-xl">
             <a href="#" className="text-primary-600 dark:text-primary-400">
-              MonPortfolio<span className="text-accent-500">.</span>
+              Mouhamed<span className="text-accent-500">.</span>Bouzyane
             </a>
           </div>
           

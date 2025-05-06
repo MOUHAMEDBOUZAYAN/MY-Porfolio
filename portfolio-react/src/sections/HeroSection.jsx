@@ -1,3 +1,4 @@
+// src/sections/HeroSection.jsx
 import { useEffect, useRef } from 'react'
 import { TypeAnimation } from 'react-type-animation'
 
@@ -47,15 +48,15 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-secondary-900 dark:text-white">
-              <span className="block">Prénom Nom</span>
+              <span className="block">Mouhamed Bouzyane</span>
               <span className="text-primary-600 dark:text-primary-400 block mt-2">
                 <TypeAnimation
                   sequence={[
                     'Développeur Frontend', 
                     2000,
-                    'Développeur React', 
+                    'Développeur React.js', 
                     2000,
-                    'Intégrateur Web', 
+                    'Développeur Full Stack', 
                     2000
                   ]}
                   wrapper="span"
@@ -67,7 +68,7 @@ const HeroSection = () => {
             
             <p className="text-lg md:text-xl text-secondary-600 dark:text-secondary-300 mb-8 leading-relaxed">
               Je crée des expériences web modernes, intuitives et performantes. 
-              Passionné par le frontend et les interfaces utilisateur élégantes.
+              Passionné par le développement frontend et les technologies JavaScript.
             </p>
             
             <div className="flex flex-wrap gap-4">
@@ -95,7 +96,7 @@ const HeroSection = () => {
             <div className="w-72 h-72 md:w-96 md:h-96 bg-white dark:bg-secondary-800 rounded-full shadow-xl flex items-center justify-center overflow-hidden">
               <img
                 src="/assets/images/profile.png"
-                alt="Photo de profil"
+                alt="Photo de Mouhamed Bouzyane"
                 className="w-full h-full object-cover"
               />
             </div>
