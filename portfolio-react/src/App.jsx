@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import HeroSection from './sections/HeroSection'
 import AboutSection from './sections/AboutSection'
@@ -7,11 +7,12 @@ import SkillsSection from './sections/SkillsSection'
 import ProjectsSection from './sections/ProjectsSection'
 import ContactSection from './sections/ContactSection'
 import Footer from './components/Footer'
+import IntroAnimation from './components/IntroAnimation'
 import { ThemeProvider } from './context/ThemeContext'
-import { useIntersectionObserver } from './hooks/useIntersectionObserver'
+import { AnimatePresence } from 'framer-motion'
 import React from 'react'
 
-// Move useIntersectionObserver to inside the component
+// Composant principal avec ThemeProvider
 function App() {
   return (
     <ThemeProvider>
@@ -20,12 +21,15 @@ function App() {
   )
 }
 
-// Create a separate component for the content to use hooks properly
+// Composant séparé pour le contenu pour utiliser les hooks correctement
 function AppContent() {
-  // This hook will be called inside a functional component
+  // État pour contrôler l'animation d'introduction
+  const [showIntro, setShowIntro] = useState(true)
+  
+  // Configurer l'observateur d'intersection pour les animations au défilement
   useEffect(() => {
-    // Call useIntersectionObserver inside the effect, not directly
-    const setupObserver = () => {
+    // Ne configurer l'observateur qu'après la fin de l'animation d'intro
+    if (!showIntro) {
       const animateOnScrollElems = document.querySelectorAll('.animate-on-scroll')
       const staggerAnimationElems = document.querySelectorAll('.stagger-animation > *')
       
@@ -53,32 +57,34 @@ function AppContent() {
         observer.observe(elem)
       })
       
-      return observer
-    }
-    
-    const observer = setupObserver()
-    
-    return () => {
-      if (observer) {
+      return () => {
         document.querySelectorAll('.animate-on-scroll, .stagger-animation > *').forEach(
           elem => observer.unobserve(elem)
         )
       }
     }
-  }, [])
+  }, [showIntro]) // Dépendance à showIntro pour n'exécuter qu'après l'intro
   
   return (
-    <div className="light">
-      <Navbar />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
+    <>
+      {/* Animation d'introduction */}
+      <AnimatePresence>
+        {showIntro && <IntroAnimation onComplete={() => setShowIntro(false)} />}
+      </AnimatePresence>
+      
+      {/* Contenu principal du site */}
+      <div className={`light transition-all duration-500 ${showIntro ? 'opacity-0' : 'opacity-100'}`}>
+        <Navbar />
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <SkillsSection />
+          <ProjectsSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
+    </>
   )
 }
 

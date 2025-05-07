@@ -1,5 +1,6 @@
 // src/sections/AboutSection.jsx
 import { useState } from 'react'
+import about from '../assets/images/about-me.jpg'
 
 const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('education')
@@ -67,7 +68,7 @@ const AboutSection = () => {
             
             <div className="relative mb-8 rounded-2xl overflow-hidden shadow-xl">
               <img 
-                src="/assets/images/about-me.jpg" 
+                src={about} 
                 alt="Photo de Mouhamed Bouzyane" 
                 className="w-full h-auto"
               />
