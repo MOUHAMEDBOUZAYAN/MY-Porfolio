@@ -46,7 +46,7 @@ function AppContent() {
         threshold: 0.1
       })
       
-      animateOnScrollElems.forEach((elem, index) => {
+      animateOnScrollElems.forEach((elem) => {
         elem.classList.add('initially-hidden')
         observer.observe(elem)
       })

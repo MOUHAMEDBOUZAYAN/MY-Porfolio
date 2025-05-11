@@ -93,3 +93,65 @@
 }
 
 
+/* Ajoutez ces styles à votre fichier CSS global ou créez un nouveau fichier */
+
+/* Styles pour assurer que les éléments du parcours s'affichent correctement */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Styles pour les cartes */
+.card {
+  @apply bg-white dark:bg-secondary-800 rounded-lg p-4 shadow-sm border border-secondary-100 dark:border-secondary-700 transition-all duration-300;
+}
+
+/* Styles pour les animations au défilement */
+.initially-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Styles pour les animations en cascade */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* Améliorations pour la partie "Mon parcours" */
+#about .card {
+  display: block;
+  width: 100%;
+}
+
+/* Assurer que les tabulations fonctionnent */
+button:focus {
+  outline: none;
+}
+
+/* Styles spécifiques pour le thème sombre */
+.dark .section-title {
+  color: white;
+}
+
+/* Styles pour s'assurer que le contenu des onglets apparaît correctement */
+#about .tab-content {
+  display: block;
+  width: 100%;
+}
+
+/* Correction pour s'assurer que les animations en cascade fonctionnent */
+@media (prefers-reduced-motion: reduce) {
+  .initially-hidden,
+  .stagger-item {
+    transition: none;
+  }
+}

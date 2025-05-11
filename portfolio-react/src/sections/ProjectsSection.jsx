@@ -1,6 +1,7 @@
 // src/sections/ProjectsSection.jsx
 import { useState, useEffect, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import portfolio from '../assets/projects/portfolio.jpg';
 
 const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all')
@@ -14,7 +15,7 @@ const ProjectsSection = () => {
       id: 1,
       title: "Portfolio Personnel",
       description: "Ce portfolio moderne et interactif, créé avec React, Vite et Tailwind CSS, présente mes compétences, projets et parcours professionnel.",
-      image: "/assets/images/projects/portfolio.jpg",
+      image: '../assets/projects/portfolio.jpg',
       technologies: ["React", "Tailwind CSS", "Vite", "Framer Motion"],
       category: "frontend",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/portfolio",
