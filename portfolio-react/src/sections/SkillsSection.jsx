@@ -327,6 +327,17 @@ const SkillsSection = () => {
       }
     };
   }, [controls]);
+
+  // Effet qui réanime le composant lorsque la catégorie change
+  useEffect(() => {
+    // Réinitialiser l'animation lorsque la catégorie change
+    const animateNewCategory = async () => {
+      await controls.start("hidden");
+      controls.start("visible");
+    };
+    
+    animateNewCategory();
+  }, [activeCategory, controls]);
   
   // Animation variants
   const sectionTitleVariants = {
@@ -472,25 +483,28 @@ const SkillsSection = () => {
           animate={controls}
         >
           {/* Description de la catégorie active */}
-          <motion.div 
-            className={`mb-8 mx-auto max-w-xl text-center ${
-              theme === 'light' ? 'text-secondary-700' : 'text-secondary-300'
-            }`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            key={activeCategory}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="flex items-center justify-center mb-2">
-              <span className="text-2xl mr-2">{activeTabInfo?.icon}</span>
-              <h3 className={`text-xl font-semibold ${
-                theme === 'light' ? 'text-secondary-900' : 'text-white'
-              }`}>
-                {activeTabInfo?.label}
-              </h3>
-            </div>
-            <p>{activeTabInfo?.description}</p>
-          </motion.div>
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={activeCategory}
+              className={`mb-8 mx-auto max-w-xl text-center ${
+                theme === 'light' ? 'text-secondary-700' : 'text-secondary-300'
+              }`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="flex items-center justify-center mb-2">
+                <span className="text-2xl mr-2">{activeTabInfo?.icon}</span>
+                <h3 className={`text-xl font-semibold ${
+                  theme === 'light' ? 'text-secondary-900' : 'text-white'
+                }`}>
+                  {activeTabInfo?.label}
+                </h3>
+              </div>
+              <p>{activeTabInfo?.description}</p>
+            </motion.div>
+          </AnimatePresence>
           
           {/* Onglets de catégorie */}
           <div className="flex flex-wrap justify-center">
@@ -568,207 +582,217 @@ const SkillsSection = () => {
           </p>
         </motion.div>
         
-        {/* Grille de compétences améliorée avec animations */}
+        {/* Grille de compétences améliorée - CORRIGÉE pour le problème d'affichage et les décalages */}
         <AnimatePresence mode="wait">
           <motion.div 
             key={activeCategory}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
             variants={gridContainerVariants}
             initial="hidden"
-            animate={controls}
-            exit={{ opacity: 0, transition: { duration: 0.2 } }}
+            animate="visible"
+            exit={{ opacity: 0, y: 10, transition: { duration: 0.2 } }}
           >
             {filteredSkills.map((skill, index) => (
-              <motion.div 
-                key={skill.name} 
-                className={`group ${
-                  theme === 'light'
-                    ? 'bg-white shadow-md hover:shadow-lg'
-                    : 'bg-secondary-800/90 hover:bg-secondary-800'
-                } rounded-xl p-6 border ${
-                  theme === 'light' 
-                    ? 'border-gray-100' 
-                    : 'border-secondary-700'
-                } hover:border-primary-500 transition-all duration-300 relative overflow-hidden`}
-                variants={gridItemVariants}
-                custom={index}
-                whileHover={{ y: -5 }}
-                onMouseEnter={() => setHoveredSkill(skill.name)}
-                onMouseLeave={() => setHoveredSkill(null)}
-              >
-                {/* Cercle décoratif en arrière-plan */}
-                <div className={`absolute top-0 right-0 w-24 h-24 rounded-full -mr-10 -mt-10 opacity-10 ${
-                  theme === 'light' 
-                    ? 'bg-primary-500' 
-                    : 'bg-primary-400'
-                } transition-opacity group-hover:opacity-20`}></div>
-                
-                <div className="flex items-start mb-4">
-                  <div className={`flex-shrink-0 w-12 h-12 ${
+              <div key={skill.name} className="relative h-[260px]">
+                <motion.div 
+                  className={`absolute inset-0 ${
+                    theme === 'light'
+                      ? 'bg-white shadow-md'
+                      : 'bg-secondary-800/90'
+                  } rounded-xl p-6 border ${
                     theme === 'light' 
-                      ? 'bg-primary-100 text-primary-600' 
-                      : 'bg-primary-900/30 text-primary-400'
-                  } rounded-lg flex items-center justify-center text-2xl mr-4`}>
-                    <span>{skill.icon}</span>
-                  </div>
+                      ? 'border-gray-100' 
+                      : 'border-secondary-700'
+                  } transition-all duration-300 overflow-hidden`}
+                  variants={gridItemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  custom={index}
+                  onMouseEnter={() => setHoveredSkill(skill.name)}
+                  onMouseLeave={() => setHoveredSkill(null)}
+                  style={{
+                    boxShadow: hoveredSkill === skill.name ? '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' : '',
+                    borderColor: hoveredSkill === skill.name ? '#4F46E5' : '',
+                    transform: hoveredSkill === skill.name ? 'translateY(-5px)' : 'translateY(0px)'
+                  }}
+                >
+                  {/* Cercle décoratif en arrière-plan */}
+                  <div className={`absolute top-0 right-0 w-24 h-24 rounded-full -mr-10 -mt-10 opacity-10 ${
+                    theme === 'light' 
+                      ? 'bg-primary-500' 
+                      : 'bg-primary-400'
+                  } transition-opacity group-hover:opacity-20`}></div>
                   
-                  <div className="flex-1">
-                    <h3 className={`text-lg font-bold mb-1 ${
-                      theme === 'light' ? 'text-secondary-900' : 'text-white'
-                    }`}>
-                      {skill.name}
-                    </h3>
-                    <div className="flex flex-wrap gap-2 mb-2">
-                      {skill.tags && skill.tags.slice(0, 2).map((tag, idx) => (
-                        <span 
-                          key={idx} 
-                          className={`text-xs px-2 py-1 rounded-full ${
-                            theme === 'light' 
-                              ? 'bg-primary-50 text-primary-700' 
-                              : 'bg-primary-900/20 text-primary-300'
-                          }`}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                      {skill.tags && skill.tags.length > 2 && (
-                        <span 
-                          className={`text-xs px-2 py-1 rounded-full ${
-                            theme === 'light' 
-                              ? 'bg-gray-100 text-gray-800' 
-                              : 'bg-secondary-700 text-secondary-300'
-                          }`}
-                        >
-                          +{skill.tags.length - 2}
-                        </span>
-                      )}
+                  <div className="flex items-start mb-4">
+                    <div className={`flex-shrink-0 w-12 h-12 ${
+                      theme === 'light' 
+                        ? 'bg-primary-100 text-primary-600' 
+                        : 'bg-primary-900/30 text-primary-400'
+                    } rounded-lg flex items-center justify-center text-2xl mr-4`}>
+                      <span>{skill.icon}</span>
+                    </div>
+                    
+                    <div className="flex-1">
+                      <h3 className={`text-lg font-bold mb-1 ${
+                        theme === 'light' ? 'text-secondary-900' : 'text-white'
+                      }`}>
+                        {skill.name}
+                      </h3>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {skill.tags && skill.tags.slice(0, 2).map((tag, idx) => (
+                          <span 
+                            key={idx} 
+                            className={`text-xs px-2 py-1 rounded-full ${
+                              theme === 'light' 
+                                ? 'bg-primary-50 text-primary-700' 
+                                : 'bg-primary-900/20 text-primary-300'
+                            }`}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                        {skill.tags && skill.tags.length > 2 && (
+                          <span 
+                            className={`text-xs px-2 py-1 rounded-full ${
+                              theme === 'light' 
+                                ? 'bg-gray-100 text-gray-800' 
+                                : 'bg-secondary-700 text-secondary-300'
+                            }`}
+                          >
+                            +{skill.tags.length - 2}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-                
-                <div className="mb-6">
-                  <p className={`text-sm ${
-                    theme === 'light' 
-                      ? 'text-secondary-600' 
-                      : 'text-secondary-400'
-                  } line-clamp-2 transition-colors`}>
-                    {skill.description}
-                  </p>
-                </div>
-                
-                {/* Barre de progression améliorée */}
-                <div className="relative">
-                  <div className={`w-full h-1.5 ${
-                    theme === 'light' 
-                      ? 'bg-gray-200' 
-                      : 'bg-secondary-700'
-                  } rounded-full overflow-hidden transition-colors`}>
-                    <motion.div 
-                      className={`h-full ${skill.level > 85 
-                        ? 'bg-gradient-to-r from-green-500 to-primary-500' 
-                        : skill.level > 70 
-                          ? 'bg-gradient-to-r from-primary-500 to-primary-400' 
-                          : 'bg-gradient-to-r from-primary-400 to-yellow-500'
-                      } rounded-full transition-colors`}
-                      initial={{ width: 0 }}
-                      animate={sectionInView ? { width: `${skill.level}%` } : { width: 0 }}
-                      transition={{ 
-                        duration: 1.5, 
-                        delay: 0.1 * index, 
-                        ease: [0.34, 1.56, 0.64, 1] 
-                      }}
-                    />
-                  </div>
                   
-                  <div className="flex justify-between mt-2">
-                    <span className={`text-xs font-medium ${
+                  <div className="mb-6">
+                    <p className={`text-sm ${
                       theme === 'light' 
                         ? 'text-secondary-600' 
                         : 'text-secondary-400'
-                    } transition-colors`}>Niveau</span>
-                    <span className={`text-xs font-semibold ${
-                      skill.level > 85 
-                        ? 'text-green-500 dark:text-green-400' 
-                        : skill.level > 70 
-                          ? 'text-primary-600 dark:text-primary-400'
-                          : 'text-yellow-500 dark:text-yellow-400'
-                    }`}>{skill.level}%</span>
+                    } line-clamp-2 transition-colors`}>
+                      {skill.description}
+                    </p>
                   </div>
-                </div>
-                
-                {/* Carte d'info détaillée au survol */}
-                <AnimatePresence>
-                  {hoveredSkill === skill.name && (
-                    <motion.div 
-                      className={`absolute inset-0 ${
-                        theme === 'light'
-                          ? 'bg-white'
-                          : 'bg-secondary-800'
-                      } p-6 rounded-xl z-10 shadow-lg`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <div className="flex items-center mb-4">
-                        <div className={`flex-shrink-0 w-12 h-12 ${
-                          theme === 'light' 
-                            ? 'bg-primary-100 text-primary-600' 
-                            : 'bg-primary-900/30 text-primary-400'
-                        } rounded-lg flex items-center justify-center text-2xl mr-4`}>
-                          <span>{skill.icon}</span>
+                  
+                  {/* Barre de progression améliorée */}
+                  <div className="relative">
+                    <div className={`w-full h-1.5 ${
+                      theme === 'light' 
+                        ? 'bg-gray-200' 
+                        : 'bg-secondary-700'
+                    } rounded-full overflow-hidden transition-colors`}>
+                      <motion.div 
+                        className={`h-full ${skill.level > 85 
+                          ? 'bg-gradient-to-r from-green-500 to-primary-500' 
+                          : skill.level > 70 
+                            ? 'bg-gradient-to-r from-primary-500 to-primary-400' 
+                            : 'bg-gradient-to-r from-primary-400 to-yellow-500'
+                        } rounded-full transition-colors`}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${skill.level}%` }}
+                        transition={{ 
+                          duration: 1.5, 
+                          delay: 0.1 * index, 
+                          ease: [0.34, 1.56, 0.64, 1] 
+                        }}
+                      />
+                    </div>
+                    
+                   <div className="flex justify-between mt-2">
+                      <span className={`text-xs font-medium ${
+                        theme === 'light' 
+                          ? 'text-secondary-600' 
+                          : 'text-secondary-400'
+                      } transition-colors`}>Niveau</span>
+                      <span className={`text-xs font-semibold ${
+                        skill.level > 85 
+                          ? 'text-green-500 dark:text-green-400' 
+                          : skill.level > 70 
+                            ? 'text-primary-600 dark:text-primary-400'
+                            : 'text-yellow-500 dark:text-yellow-400'
+                      }`}>{skill.level}%</span>
+                    </div>
+                  </div>
+
+                  {/* Carte d'info détaillée au survol - CORRIGÉE pour éviter le décalage */}
+                  <AnimatePresence>
+                    {hoveredSkill === skill.name && (
+                      <motion.div 
+                        className={`absolute inset-0 ${
+                          theme === 'light'
+                            ? 'bg-white'
+                            : 'bg-secondary-800'
+                        } p-6 rounded-xl z-10 overflow-auto`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        style={{
+                          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                        }}
+                      >
+                        <div className="flex items-center mb-4">
+                          <div className={`flex-shrink-0 w-12 h-12 ${
+                            theme === 'light' 
+                              ? 'bg-primary-100 text-primary-600' 
+                              : 'bg-primary-900/30 text-primary-400'
+                          } rounded-lg flex items-center justify-center text-2xl mr-4`}>
+                            <span>{skill.icon}</span>
+                          </div>
+                          <h3 className={`text-lg font-bold ${
+                            theme === 'light' ? 'text-secondary-900' : 'text-white'
+                          }`}>{skill.name}</h3>
                         </div>
-                        <h3 className={`text-lg font-bold ${
-                          theme === 'light' ? 'text-secondary-900' : 'text-white'
-                        }`}>{skill.name}</h3>
-                      </div>
-                      
-                      <div className="mb-4">
-                        <h4 className={`text-sm font-medium mb-1 ${
-                          theme === 'light' ? 'text-secondary-900' : 'text-white'
-                        }`}>Description</h4>
-                        <p className={`text-sm ${
-                          theme === 'light' ? 'text-secondary-700' : 'text-secondary-300'
-                        }`}>{skill.description}</p>
-                      </div>
-                      
-                      <div className="mb-4">
-                        <h4 className={`text-sm font-medium mb-1 ${
-                          theme === 'light' ? 'text-secondary-900' : 'text-white'
-                        }`}>Expérience</h4>
-                        <p className={`text-sm ${
-                          theme === 'light' ? 'text-secondary-700' : 'text-secondary-300'
-                        }`}>{skill.experience}</p>
-                      </div>
-                      
-                      <div>
-                        <h4 className={`text-sm font-medium mb-2 ${
-                          theme === 'light' ? 'text-secondary-900' : 'text-white'
-                        }`}>Tags</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {skill.tags && skill.tags.map((tag, idx) => (
-                            <span 
-                              key={idx} 
-                              className={`text-xs px-2 py-1 rounded-full ${
-                                theme === 'light' 
-                                  ? 'bg-primary-50 text-primary-700' 
-                                  : 'bg-primary-900/20 text-primary-300'
-                              }`}
-                            >
-                              {tag}
-                            </span>
-                          ))}
+                        
+                        <div className="mb-4">
+                          <h4 className={`text-sm font-medium mb-1 ${
+                            theme === 'light' ? 'text-secondary-900' : 'text-white'
+                          }`}>Description</h4>
+                          <p className={`text-sm ${
+                            theme === 'light' ? 'text-secondary-700' : 'text-secondary-300'
+                          }`}>{skill.description}</p>
                         </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                        
+                        <div className="mb-4">
+                          <h4 className={`text-sm font-medium mb-1 ${
+                            theme === 'light' ? 'text-secondary-900' : 'text-white'
+                          }`}>Expérience</h4>
+                          <p className={`text-sm ${
+                            theme === 'light' ? 'text-secondary-700' : 'text-secondary-300'
+                          }`}>{skill.experience}</p>
+                        </div>
+                        
+                        <div>
+                          <h4 className={`text-sm font-medium mb-2 ${
+                            theme === 'light' ? 'text-secondary-900' : 'text-white'
+                          }`}>Tags</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {skill.tags && skill.tags.map((tag, idx) => (
+                              <span 
+                                key={idx} 
+                                className={`text-xs px-2 py-1 rounded-full ${
+                                  theme === 'light' 
+                                    ? 'bg-primary-50 text-primary-700' 
+                                    : 'bg-primary-900/20 text-primary-300'
+                                }`}
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              </div>
             ))}
           </motion.div>
         </AnimatePresence>
         
-        {/* Section des langues */}
+        {/* Section des langues - CORRIGÉE pour éviter les décalages */}
         <motion.div
           className="mb-10"
           initial="hidden"
@@ -790,74 +814,81 @@ const SkillsSection = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {languages.map((language, index) => (
-              <motion.div
-                key={language.name}
-                className={`${
-                  theme === 'light'
-                    ? 'bg-white shadow-md'
-                    : 'bg-secondary-800/90'
-                } rounded-xl p-6 border ${
-                  theme === 'light' 
-                    ? 'border-gray-100' 
-                    : 'border-secondary-700'
-                } transition-all duration-300 relative overflow-hidden`}
-                variants={languageItemVariants}
-                custom={index}
-                whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
-              >
-                {/* Fond gradié */}
-                <div className={`absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r ${language.color}`}></div>
-                
-                <div className="flex items-center mb-6">
-                  <div className="text-3xl mr-3">{language.icon}</div>
-                  <div>
-                    <h4 className={`text-xl font-bold ${
-                      theme === 'light' ? 'text-secondary-900' : 'text-white'
-                    }`}>{language.name}</h4>
-                    <p className={`text-sm font-medium ${
-                      theme === 'light' ? 'text-primary-600' : 'text-primary-400'
-                    }`}>{language.proficiency}</p>
-                  </div>
-                </div>
-                
-                <p className={`text-sm mb-6 ${
-                  theme === 'light' ? 'text-secondary-600' : 'text-secondary-300'
-                }`}>
-                  {language.description}
-                </p>
-                
-                <div className="relative">
-                  <div className={`w-full h-1.5 ${
+              <div key={language.name} className="relative h-[210px]">
+                <motion.div
+                  className={`absolute inset-0 ${
+                    theme === 'light'
+                      ? 'bg-white shadow-md'
+                      : 'bg-secondary-800/90'
+                  } rounded-xl p-6 border ${
                     theme === 'light' 
-                      ? 'bg-gray-200' 
-                      : 'bg-secondary-700'
-                  } rounded-full overflow-hidden`}>
-                    <motion.div 
-                      className={`h-full bg-gradient-to-r ${language.color} rounded-full`}
-                      initial={{ width: 0 }}
-                      animate={sectionInView ? { width: `${language.level}%` } : { width: 0 }}
-                      transition={{ 
-                        duration: 1.5, 
-                        delay: 0.3 + (0.1 * index), 
-                        ease: [0.34, 1.56, 0.64, 1] 
-                      }}
-                    />
+                      ? 'border-gray-100' 
+                      : 'border-secondary-700'
+                  } transition-all duration-300 relative overflow-hidden`}
+                  variants={languageItemVariants}
+                  custom={index}
+                  initial="hidden"
+                  animate="visible"
+                  whileHover={{ 
+                    y: -5, 
+                    boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)', 
+                    transition: { duration: 0.2 } 
+                  }}
+                >
+                  {/* Fond gradié */}
+                  <div className={`absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r ${language.color}`}></div>
+                  
+                  <div className="flex items-center mb-6">
+                    <div className="text-3xl mr-3">{language.icon}</div>
+                    <div>
+                      <h4 className={`text-xl font-bold ${
+                        theme === 'light' ? 'text-secondary-900' : 'text-white'
+                      }`}>{language.name}</h4>
+                      <p className={`text-sm font-medium ${
+                        theme === 'light' ? 'text-primary-600' : 'text-primary-400'
+                      }`}>{language.proficiency}</p>
+                    </div>
                   </div>
                   
-                  <div className="flex justify-between mt-2">
-                    <span className={`text-xs font-medium ${
+                  <p className={`text-sm mb-6 ${
+                    theme === 'light' ? 'text-secondary-600' : 'text-secondary-300'
+                  }`}>
+                    {language.description}
+                  </p>
+                  
+                  <div className="relative">
+                    <div className={`w-full h-1.5 ${
                       theme === 'light' 
-                        ? 'text-secondary-600' 
-                        : 'text-secondary-400'
-                    }`}>Niveau</span>
-                    <span className={`text-xs font-semibold ${
-                      theme === 'light' 
-                        ? 'text-secondary-900' 
-                        : 'text-white'
-                    }`}>{language.level}%</span>
+                        ? 'bg-gray-200' 
+                        : 'bg-secondary-700'
+                    } rounded-full overflow-hidden`}>
+                      <motion.div 
+                        className={`h-full bg-gradient-to-r ${language.color} rounded-full`}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${language.level}%` }}
+                        transition={{ 
+                          duration: 1.5, 
+                          delay: 0.3 + (0.1 * index), 
+                          ease: [0.34, 1.56, 0.64, 1] 
+                        }}
+                      />
+                    </div>
+                    
+                    <div className="flex justify-between mt-2">
+                      <span className={`text-xs font-medium ${
+                        theme === 'light' 
+                          ? 'text-secondary-600' 
+                          : 'text-secondary-400'
+                      }`}>Niveau</span>
+                      <span className={`text-xs font-semibold ${
+                        theme === 'light' 
+                          ? 'text-secondary-900' 
+                          : 'text-white'
+                      }`}>{language.level}%</span>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>
