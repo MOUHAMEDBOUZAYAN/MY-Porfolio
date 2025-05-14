@@ -792,7 +792,7 @@ const SkillsSection = () => {
           </motion.div>
         </AnimatePresence>
         
-        {/* Section des langues - CORRIGÉE pour éviter les décalages */}
+        {/* Section des langues - CORRIGÉE avec animations améliorées */}
         <motion.div
           className="mb-10"
           initial="hidden"
@@ -800,64 +800,113 @@ const SkillsSection = () => {
           variants={languageSectionVariants}
         >
           <div className="text-center mb-10">
-            <h3 className={`text-2xl md:text-3xl font-bold mb-4 ${
-              theme === 'light' ? 'text-secondary-900' : 'text-white'
-            }`}>
+            <motion.h3 
+              className={`text-2xl md:text-3xl font-bold mb-4 ${
+                theme === 'light' ? 'text-secondary-900' : 'text-white'
+              }`}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
               Langues <span className="text-primary-600 dark:text-primary-400">maîtrisées</span>
-            </h3>
-            <p className={`max-w-2xl mx-auto ${
-              theme === 'light' ? 'text-secondary-600' : 'text-secondary-300'
-            }`}>
+            </motion.h3>
+            <motion.p 
+              className={`max-w-2xl mx-auto ${
+                theme === 'light' ? 'text-secondary-600' : 'text-secondary-300'
+              }`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               Les langues que je parle et leur niveau de maîtrise
-            </p>
+            </motion.p>
           </div>
           
+          {/* Grille de langues avec hauteur fixe et animations améliorées */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {languages.map((language, index) => (
-              <div key={language.name} className="relative h-[210px]">
-                <motion.div
-                  className={`absolute inset-0 ${
-                    theme === 'light'
-                      ? 'bg-white shadow-md'
-                      : 'bg-secondary-800/90'
-                  } rounded-xl p-6 border ${
-                    theme === 'light' 
-                      ? 'border-gray-100' 
-                      : 'border-secondary-700'
-                  } transition-all duration-300 relative overflow-hidden`}
-                  variants={languageItemVariants}
-                  custom={index}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover={{ 
-                    y: -5, 
-                    boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)', 
-                    transition: { duration: 0.2 } 
-                  }}
-                >
-                  {/* Fond gradié */}
-                  <div className={`absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r ${language.color}`}></div>
-                  
+              <motion.div 
+                key={language.name}
+                className={`h-56 rounded-xl overflow-hidden ${
+                  theme === 'light'
+                    ? 'bg-white shadow-md border border-gray-100'
+                    : 'bg-secondary-800/90 border border-secondary-700'
+                } relative`}
+                variants={languageItemVariants}
+                initial="hidden"
+                animate="visible"
+                whileHover={{ 
+                  y: -10, 
+                  scale: 1.02, 
+                  boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)",
+                  transition: {
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 15
+                  }
+                }}
+              >
+                {/* Fond gradié animé */}
+                <motion.div 
+                  className={`absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r ${language.color}`}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.8, delay: 0.5 + (index * 0.2) }}
+                ></motion.div>
+                
+                {/* Contenu avec animation */}
+                <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center mb-6">
-                    <div className="text-3xl mr-3">{language.icon}</div>
+                    <motion.div 
+                      className="text-3xl mr-3"
+                      initial={{ scale: 0, rotate: -20 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20,
+                        delay: 0.3 + (index * 0.1)
+                      }}
+                    >
+                      {language.icon}
+                    </motion.div>
                     <div>
-                      <h4 className={`text-xl font-bold ${
-                        theme === 'light' ? 'text-secondary-900' : 'text-white'
-                      }`}>{language.name}</h4>
-                      <p className={`text-sm font-medium ${
-                        theme === 'light' ? 'text-primary-600' : 'text-primary-400'
-                      }`}>{language.proficiency}</p>
+                      <motion.h4 
+                        className={`text-xl font-bold ${
+                          theme === 'light' ? 'text-secondary-900' : 'text-white'
+                        }`}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.4 + (index * 0.1) }}
+                      >
+                        {language.name}
+                      </motion.h4>
+                      <motion.p 
+                        className={`text-sm font-medium ${
+                          theme === 'light' ? 'text-primary-600' : 'text-primary-400'
+                        }`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.4, delay: 0.5 + (index * 0.1) }}
+                      >
+                        {language.proficiency}
+                      </motion.p>
                     </div>
                   </div>
                   
-                  <p className={`text-sm mb-6 ${
-                    theme === 'light' ? 'text-secondary-600' : 'text-secondary-300'
-                  }`}>
+                  <motion.p 
+                    className={`text-sm mb-6 flex-grow ${
+                      theme === 'light' ? 'text-secondary-600' : 'text-secondary-300'
+                    }`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.6 + (index * 0.1) }}
+                  >
                     {language.description}
-                  </p>
+                  </motion.p>
                   
-                  <div className="relative">
-                    <div className={`w-full h-1.5 ${
+                  <div className="relative mt-auto">
+                    <div className={`w-full h-2 ${
                       theme === 'light' 
                         ? 'bg-gray-200' 
                         : 'bg-secondary-700'
@@ -868,8 +917,8 @@ const SkillsSection = () => {
                         animate={{ width: `${language.level}%` }}
                         transition={{ 
                           duration: 1.5, 
-                          delay: 0.3 + (0.1 * index), 
-                          ease: [0.34, 1.56, 0.64, 1] 
+                          delay: 0.7 + (index * 0.2),
+                          ease: [0.34, 1.56, 0.64, 1]
                         }}
                       />
                     </div>
@@ -880,15 +929,22 @@ const SkillsSection = () => {
                           ? 'text-secondary-600' 
                           : 'text-secondary-400'
                       }`}>Niveau</span>
-                      <span className={`text-xs font-semibold ${
-                        theme === 'light' 
-                          ? 'text-secondary-900' 
-                          : 'text-white'
-                      }`}>{language.level}%</span>
+                      <motion.span 
+                        className={`text-xs font-semibold ${
+                          theme === 'light' 
+                            ? 'text-secondary-900' 
+                            : 'text-white'
+                        }`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 1 + (index * 0.1) }}
+                      >
+                        {language.level}%
+                      </motion.span>
                     </div>
                   </div>
-                </motion.div>
-              </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>
