@@ -9,6 +9,7 @@ import SecureAuth from '../assets/images/SecureAuth.png';
 import Météo from '../assets/images/Application Météo.jpeg';
 import music from '../assets/images/music player.jpeg';
 import Blog from '../assets/images/Blog.jpeg';
+import film from '../assets/images/Projetfilm.jpg'
 
 const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all')
@@ -53,10 +54,10 @@ const ProjectsSection = () => {
     },
     {
       id: 8,
-      title: "Portfolio Photographe",
+      title: "FilmExplorer ",
       description: "Site vitrine pour photographe professionnel avec galerie interactive et animations fluides.",
-      image: music, 
-      technologies: ["JavaScript", "GSAP", "HTML5", "SASS"],
+      image: film, 
+      technologies: ["JavaScript", "REACT", "HTML5", "Tailwind CSS"],
       category: "frontend",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/photographer-portfolio",
       liveLink: "#",

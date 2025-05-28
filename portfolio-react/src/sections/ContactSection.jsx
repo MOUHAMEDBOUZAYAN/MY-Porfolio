@@ -352,28 +352,8 @@ const ContactSection = () => {
         </div>
       </div>
       
-      {/* Map section */}
-      {/* <div className="mt-20 bg-white dark:bg-secondary-800 rounded-2xl shadow-xl overflow-hidden contact-animate mx-auto max-w-6xl h-96 relative">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107100.85585195071!2d-6.419801620898324!3d32.33959902394084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda385da7838016d%3A0x3f4236ab7af39be!2sBeni%20Mellal%2C%20Morocco!5e0!3m2!1sen!2sus!4v1612345678901!5m2!1sen!2sus" 
-          width="100%" 
-          height="100%" 
-          style={{ border: 0 }} 
-          allowFullScreen="" 
-          loading="lazy"
-          title="Carte de localisation"
-        ></iframe>
-        
-        <div className="absolute top-4 left-4 bg-white dark:bg-secondary-800 p-4 rounded-lg shadow-lg">
-          <div className="flex items-center space-x-2">
-            <svg className="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span className="text-secondary-900 dark:text-white font-medium">Beni Mellal, Maroc</span>
-          </div>
-        </div>
-      </div> */}
+      
+      
     </section>
   )
 }
