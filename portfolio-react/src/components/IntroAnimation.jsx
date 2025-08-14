@@ -4,33 +4,33 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const IntroAnimation = ({ onComplete }) => {
   const [progress, setProgress] = useState(0)
-  const [phase, setPhase] = useState(1) // Phases de l'animation: 1, 2, 3
+  const [phase, setPhase] = useState(1) // Phases: 1=Chargement, 2=Présentation, 3=Sortie
   
   useEffect(() => {
-    // Phase 1: Chargement initial
+    // Phase 1: Chargement progressif
     const loadingInterval = setInterval(() => {
       setProgress(prev => {
-        const next = prev + 2
+        const next = prev + 1.5
         if (next >= 100) {
           clearInterval(loadingInterval)
-          setTimeout(() => setPhase(2), 300) // Passer à la phase 2
+          setTimeout(() => setPhase(2), 500) // Passer à la phase 2
           return 100
         }
         return next
       })
-    }, 20)
+    }, 30)
     
     return () => clearInterval(loadingInterval)
   }, [])
   
-  // Phase 2 & 3 - Transition vers le logo et sortie
+  // Phase 2 & 3 - Transition et sortie
   useEffect(() => {
     if (phase === 2) {
       // Attendre pour la phase de présentation
-      setTimeout(() => setPhase(3), 2500)
+      setTimeout(() => setPhase(3), 3000)
     } else if (phase === 3) {
       // Attendre pour la sortie
-      setTimeout(() => onComplete(), 1000)
+      setTimeout(() => onComplete(), 1200)
     }
   }, [phase, onComplete])
   
@@ -39,29 +39,32 @@ const IntroAnimation = ({ onComplete }) => {
       {phase < 4 && (
         <motion.div 
           className="fixed inset-0 flex flex-col items-center justify-center z-50"
-          style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)" }}
+          style={{ 
+            background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)"
+          }}
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.8, ease: [0.65, 0, 0.35, 1] } }}
+          exit={{ opacity: 0, transition: { duration: 1, ease: [0.65, 0, 0.35, 1] } }}
         >
-          {/* Éléments décoratifs - Particles */}
-          {Array.from({ length: 20 }).map((_, i) => (
+          {/* Éléments décoratifs - Particules flottantes */}
+          {Array.from({ length: 25 }).map((_, i) => (
             <motion.div
               key={i}
-              className="absolute rounded-full bg-teal-500/30"
+              className="absolute rounded-full"
               style={{ 
-                width: Math.random() * 12 + 2,
-                height: Math.random() * 12 + 2,
+                width: Math.random() * 8 + 3,
+                height: Math.random() * 8 + 3,
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
+                background: `rgba(${Math.random() * 255}, ${Math.random() * 255}, 255, 0.3)`
               }}
               animate={{ 
-                x: [0, Math.random() * 50 - 25],
-                y: [0, Math.random() * 50 - 25],
+                x: [0, Math.random() * 60 - 30],
+                y: [0, Math.random() * 60 - 30],
                 opacity: [0, 0.8, 0],
                 scale: [0, 1, 0.5],
               }}
               transition={{ 
-                duration: Math.random() * 2 + 2,
+                duration: Math.random() * 3 + 2,
                 repeat: Infinity,
                 repeatType: "mirror",
                 ease: "easeInOut"
@@ -69,39 +72,74 @@ const IntroAnimation = ({ onComplete }) => {
             />
           ))}
           
-          {/* Grille d'arrière-plan */}
+          {/* Grille d'arrière-plan moderne */}
           <motion.div
-            className="absolute inset-0 opacity-30"
+            className="absolute inset-0 opacity-20"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.15 }}
-            transition={{ duration: 1 }}
+            animate={{ opacity: 0.2 }}
+            transition={{ duration: 1.5 }}
           >
             <div className="w-full h-full" style={{ 
-              backgroundImage: "linear-gradient(#2563eb 1px, transparent 1px), linear-gradient(90deg, #2563eb 1px, transparent 1px)",
-              backgroundSize: "30px 30px"
+              backgroundImage: `
+                linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: "40px 40px"
             }}></div>
           </motion.div>
 
-          {/* Phase 1: Chargement */}
+          {/* Phase 1: Chargement professionnel */}
           {phase === 1 && (
             <motion.div
-              className="flex flex-col items-center justify-center space-y-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              className="flex flex-col items-center justify-center space-y-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6 }}
             >
+              {/* Logo animé */}
               <motion.div 
-                className="w-24 h-24 rounded-full border-4 border-teal-400 border-t-transparent"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-              />
-              
-              <motion.div 
-                className="w-64 h-[3px] bg-gray-700 rounded-full overflow-hidden"
+                className="relative mb-8"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <motion.div 
-                  className="h-full bg-gradient-to-r from-teal-400 to-blue-500"
+                  className="w-28 h-28 rounded-full border-4 border-blue-500 border-t-transparent relative"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                >
+                  <motion.div 
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 opacity-20"
+                    animate={{ 
+                      scale: [1, 1.1, 1],
+                      opacity: [0.2, 0.4, 0.2],
+                    }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                </motion.div>
+                
+                {/* Indicateur de progression */}
+                <motion.div 
+                  className="absolute inset-0 rounded-full border-4 border-transparent border-r-blue-400"
+                  style={{ 
+                    background: `conic-gradient(from 0deg, transparent ${progress * 3.6}deg, transparent ${progress * 3.6}deg)`
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                />
+              </motion.div>
+              
+              {/* Barre de progression */}
+              <motion.div 
+                className="w-80 h-2 bg-slate-700 rounded-full overflow-hidden shadow-inner"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 rounded-full"
                   style={{ width: `${progress}%` }}
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
@@ -109,122 +147,192 @@ const IntroAnimation = ({ onComplete }) => {
                 />
               </motion.div>
               
-              <motion.p 
-                className="text-gray-300 font-medium text-sm"
+              {/* Texte de chargement */}
+              <motion.div 
+                className="text-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-              >
-                Chargement {progress}%
-              </motion.p>
-            </motion.div>
-          )}
-          
-          {/* Phase 2: Animation Logo & Titre */}
-          {phase >= 2 && (
-            <motion.div 
-              className="text-center relative"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: phase === 3 ? 0 : 1 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {/* Logo/Icône animé */}
-              <motion.div 
-                className="mb-6 flex justify-center"
-                initial={{ y: -20 }}
-                animate={{ y: 0 }}
-                transition={{ delay: 0.3, type: "spring" }}
-              >
-                <motion.div 
-                  className="relative w-24 h-24 flex items-center justify-center"
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                >
-                  <motion.div 
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-teal-400"
-                    style={{ filter: "blur(10px)" }}
-                    animate={{ 
-                      scale: [1, 1.2, 1],
-                      opacity: [0.6, 0.8, 0.6],
-                    }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <motion.div className="w-14 h-14 bg-white rounded-full z-10 flex items-center justify-center">
-                    <span className="text-2xl text-blue-600">MB</span>
-                  </motion.div>
-                </motion.div>
-              </motion.div>
-              
-              {/* Nom avec effet de révélation */}
-              <motion.h1 
-                className="text-5xl font-bold mb-3"
-                style={{ textShadow: "0 0 10px rgba(56, 189, 248, 0.3)" }}
-                initial={{ clipPath: "inset(0 100% 0 0)" }}
-                animate={{ clipPath: "inset(0 0% 0 0)" }}
-                transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <span className="bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent">
-                  Mouhamed.Bouzyane
-                </span>
-              </motion.h1>
-              
-              {/* Titre avec effet de machine à écrire */}
-              <motion.div
-                className="h-8 overflow-hidden"
-                initial={{ height: 0 }}
-                animate={{ height: "2rem" }}
-                transition={{ delay: 1.2, duration: 0.5 }}
+                transition={{ delay: 0.6 }}
               >
                 <motion.p 
-                  className="text-lg text-teal-300"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.5 }}
+                  className="text-slate-300 font-medium text-lg mb-2"
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
                 >
-                  <TypewriterEffect text="Développeur Full Stack" delay={80} />
+                  Initialisation du portfolio
+                </motion.p>
+                <motion.p 
+                  className="text-blue-400 font-bold text-2xl"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                >
+                  {Math.round(progress)}%
                 </motion.p>
               </motion.div>
             </motion.div>
           )}
           
-          {/* Cercles concentriques animés en arrière-plan, visibles en phase 2 */}
+          {/* Phase 2: Présentation professionnelle */}
+          {phase >= 2 && (
+            <motion.div 
+              className="text-center relative z-10"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: phase === 3 ? 0 : 1, scale: phase === 3 ? 0.9 : 1 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {/* Logo principal animé */}
+              <motion.div 
+                className="mb-8 flex justify-center"
+                initial={{ y: -30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
+              >
+                <motion.div 
+                  className="relative w-32 h-32 flex items-center justify-center"
+                  animate={{ 
+                    rotate: [0, 360],
+                    scale: [1, 1.05, 1]
+                  }}
+                  transition={{ 
+                    rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                    scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                >
+                  {/* Anneaux concentriques */}
+                  <motion.div 
+                    className="absolute inset-0 rounded-full border-2 border-blue-500/30"
+                    animate={{ 
+                      scale: [1, 1.3, 1],
+                      opacity: [0.3, 0.6, 0.3],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                  <motion.div 
+                    className="absolute inset-0 rounded-full border-2 border-purple-500/30"
+                    animate={{ 
+                      scale: [1.3, 1, 1.3],
+                      opacity: [0.3, 0.6, 0.3],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  />
+                  
+                  {/* Logo central */}
+                  <motion.div 
+                    className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl"
+                    animate={{ 
+                      boxShadow: [
+                        "0 0 20px rgba(59, 130, 246, 0.5)",
+                        "0 0 40px rgba(147, 51, 234, 0.8)",
+                        "0 0 20px rgba(59, 130, 246, 0.5)"
+                      ]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <span className="text-3xl font-bold text-white">MB</span>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+              
+              {/* Nom avec effet de révélation professionnel */}
+              <motion.h1 
+                className="text-6xl md:text-7xl font-bold mb-6"
+                style={{ 
+                  textShadow: "0 0 30px rgba(59, 130, 246, 0.5)",
+                  letterSpacing: "0.1em"
+                }}
+                initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0 }}
+                animate={{ 
+                  clipPath: "inset(0 0% 0 0)", 
+                  opacity: 1 
+                }}
+                transition={{ duration: 1.2, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500 bg-clip-text text-transparent">
+                  Mouhamed.Bouzyane
+                </span>
+              </motion.h1>
+              
+              {/* Titre professionnel avec animation */}
+              <motion.div
+                className="h-12 overflow-hidden mb-8"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "3rem", opacity: 1 }}
+                transition={{ delay: 1.5, duration: 0.8 }}
+              >
+                <motion.p 
+                  className="text-2xl md:text-3xl text-slate-300 font-medium"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 2.0 }}
+                >
+                  <TypewriterEffect text="Développeur Full Stack Professionnel" delay={100} />
+                </motion.p>
+              </motion.div>
+
+              {/* Badge de spécialisation */}
+              <motion.div
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 rounded-full backdrop-blur-sm"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 2.5, duration: 0.6 }}
+              >
+                <span className="text-blue-400 mr-2">🚀</span>
+                <span className="text-slate-300 font-medium">React.js • Node.js • Modern Web</span>
+              </motion.div>
+            </motion.div>
+          )}
+          
+          {/* Cercles concentriques animés en arrière-plan */}
           {phase === 2 && (
             <motion.div 
-              className="absolute" 
-              style={{ 
-                width: 600, 
-                height: 600, 
-                top: "50%", 
-                left: "50%", 
-                x: "-50%", 
-                y: "-50%", 
-                zIndex: -1 
-              }}
+              className="absolute inset-0 flex items-center justify-center"
+              style={{ zIndex: -1 }}
             >
               {[0, 1, 2, 3].map((i) => (
                 <motion.div
                   key={i}
-                  className="absolute rounded-full border border-teal-500/30"
+                  className="absolute rounded-full border border-blue-500/20"
                   style={{ 
-                    width: "100%", 
-                    height: "100%", 
-                    top: 0, 
-                    left: 0 
+                    width: `${400 + i * 100}px`, 
+                    height: `${400 + i * 100}px`
                   }}
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ 
-                    opacity: [0, 0.5, 0],
-                    scale: [0.8, 2, 3],
+                    opacity: [0, 0.3, 0],
+                    scale: [0.5, 1.2, 2],
                   }}
                   transition={{ 
-                    duration: 4,
-                    delay: i * 1,
+                    duration: 6,
+                    delay: i * 1.5,
                     repeat: Infinity,
                     ease: "easeOut"
                   }}
                 />
               ))}
+            </motion.div>
+          )}
+
+          {/* Indicateur de chargement final */}
+          {phase === 3 && (
+            <motion.div
+              className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <motion.div
+                className="flex items-center space-x-2 text-slate-400"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <span className="text-sm">Chargement terminé</span>
+                <motion.div
+                  className="w-2 h-2 bg-blue-400 rounded-full"
+                  animate={{ scale: [1, 1.5, 1] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                />
+              </motion.div>
             </motion.div>
           )}
         </motion.div>
@@ -233,25 +341,32 @@ const IntroAnimation = ({ onComplete }) => {
   )
 }
 
-// Composant d'effet de machine à écrire
+// Composant d'effet de machine à écrire amélioré
 const TypewriterEffect = ({ text, delay = 100 }) => {
   const [displayText, setDisplayText] = useState('')
+  const [currentIndex, setCurrentIndex] = useState(0)
   
   useEffect(() => {
-    let i = 0
-    const timer = setInterval(() => {
-      if (i < text.length) {
-        setDisplayText(prev => prev + text.charAt(i))
-        i++
-      } else {
-        clearInterval(timer)
-      }
-    }, delay)
-    
-    return () => clearInterval(timer)
-  }, [text, delay])
+    if (currentIndex < text.length) {
+      const timer = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex])
+        setCurrentIndex(prev => prev + 1)
+      }, delay)
+      
+      return () => clearTimeout(timer)
+    }
+  }, [currentIndex, text, delay])
   
-  return <>{displayText}</>
+  return (
+    <span>
+      {displayText}
+      <motion.span
+        className="inline-block w-1 h-6 bg-blue-400 ml-1"
+        animate={{ opacity: [1, 0, 1] }}
+        transition={{ duration: 1, repeat: Infinity }}
+      />
+    </span>
+  )
 }
 
 export default IntroAnimation

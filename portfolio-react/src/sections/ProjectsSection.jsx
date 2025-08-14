@@ -10,6 +10,8 @@ import Météo from '../assets/images/Application Météo.jpeg';
 import music from '../assets/images/music player.jpeg';
 import Blog from '../assets/images/Blog.jpeg';
 import film from '../assets/images/Projetfilm.jpg'
+import Ecomerce from '../assets/images/E-Commerce-Dashboard.jpeg'
+import Dashboard from '../assets/images/Dashboard.png'
 
 const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all')
@@ -45,7 +47,7 @@ const ProjectsSection = () => {
       id: 7,
       title: "E-Commerce Dashboard",
       description: "Interface utilisateur moderne pour une plateforme de commerce électronique avec gestion des produits et statistiques en temps réel.",
-      image: music, 
+      image: Ecomerce, 
       technologies: ["React", "Redux", "Material UI", "Recharts"],
       category: "frontend",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/ecommerce-dashboard",
@@ -60,14 +62,14 @@ const ProjectsSection = () => {
       technologies: ["JavaScript", "REACT", "HTML5", "Tailwind CSS"],
       category: "frontend",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/photographer-portfolio",
-      liveLink: "#",
+      liveLink: "https://film-finder-demo.netlify.app/",
       featured: false
     },
     {
       id: 9,
       title: "Dashboard Analytics",
       description: "Tableau de bord d'analyse de données avec visualisations dynamiques et filtres interactifs.",
-      image: music, 
+      image: Dashboard, 
       technologies: ["React", "D3.js", "Tailwind CSS", "TypeScript"],
       category: "frontend",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/analytics-dashboard",
@@ -86,7 +88,7 @@ const ProjectsSection = () => {
       technologies: ["Node.js", "Express", "MongoDB", "JWT"],
       category: "backend",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/CookSecure-Site",
-      liveLink: "#",
+      liveLink: "https://cuisin-app.netlify.app/",
       featured: false
     },
     {
@@ -103,7 +105,7 @@ const ProjectsSection = () => {
     {
       id: 11,
       title: "Microservice de Paiement",
-      description: "Microservice pour le traitement sécurisé des paiements avec intégration Stripe et PayPal.",
+      description: "Microservice pour le traitement sécurisé des paiements avec intégration Stripe et PayPal. (En cours de développement)",
       image: music, 
       technologies: ["Node.js", "Express", "Stripe API", "Docker"],
       category: "backend",
@@ -114,7 +116,7 @@ const ProjectsSection = () => {
     {
       id: 12,
       title: "API de Notification",
-      description: "Service de notification en temps réel avec support pour emails, SMS et notifications push.",
+      description: "Service de notification en temps réel avec support pour emails, SMS et notifications push. (En cours de développement)",
       image: music, 
       technologies: ["Node.js", "Socket.IO", "Redis", "AWS SES"],
       category: "backend",
@@ -129,7 +131,7 @@ const ProjectsSection = () => {
     {
       id: 3,
       title: "Music-App--Project-file-Rouge",
-      description: "Application de gestion de tâches avec fonctionnalités de drag-and-drop permettant aux utilisateurs d'organiser leurs tâches par statut et priorité.",
+      description: "Application de gestion de tâches avec fonctionnalités de drag-and-drop permettant aux utilisateurs d'organiser leurs tâches par statut et priorité. (En cours de développement)",
       image: music,
       technologies: ["React", "Node.js", "Express", "MongoDB"],
       category: "fullstack",

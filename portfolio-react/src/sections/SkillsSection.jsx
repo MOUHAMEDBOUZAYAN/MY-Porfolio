@@ -427,9 +427,6 @@ const SkillsSection = () => {
   // État pour la catégorie survolée (pour l'effet d'information)
   const [hoveredCategory, setHoveredCategory] = useState(null);
 
-  // Trouver la catégorie actuellement active
-  const activeTabInfo = categories.find(cat => cat.id === activeCategory);
-
   return (
     <section 
       id="skills" 
@@ -482,7 +479,7 @@ const SkillsSection = () => {
           initial="hidden"
           animate={controls}
         >
-          {/* Description de la catégorie active */}
+          {/* Description de la catégorie active - AFFICHÉE AU-DESSUS des boutons */}
           <AnimatePresence mode="wait">
             <motion.div 
               key={activeCategory}
@@ -495,14 +492,14 @@ const SkillsSection = () => {
               transition={{ duration: 0.3 }}
             >
               <div className="flex items-center justify-center mb-2">
-                <span className="text-2xl mr-2">{activeTabInfo?.icon}</span>
+                <span className="text-2xl mr-2">{categories.find(cat => cat.id === activeCategory)?.icon}</span>
                 <h3 className={`text-xl font-semibold ${
                   theme === 'light' ? 'text-secondary-900' : 'text-white'
                 }`}>
-                  {activeTabInfo?.label}
+                  {categories.find(cat => cat.id === activeCategory)?.label}
                 </h3>
               </div>
-              <p>{activeTabInfo?.description}</p>
+              <p>{categories.find(cat => cat.id === activeCategory)?.description}</p>
             </motion.div>
           </AnimatePresence>
           

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import about from '../assets/images/about-me.jpg';
-import cv from '../../src/assets/resume.pdf';
+import cv from '../assets/projects/Mouhamed_Bouzyane_CV.pdf';
 
 const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('education');
@@ -17,21 +17,30 @@ const AboutSection = () => {
   }, [downloadState]);
 
   // Fonction pour gérer le téléchargement du CV
-  const handleDownloadCV = () => {
-    setDownloadState('downloading');
+  const handleDownloadCV = async () => {
+    try {
+      setDownloadState('downloading');
 
-    // Simuler un délai de téléchargement (à remplacer par votre vrai téléchargement)
-    setTimeout(() => {
-      setDownloadState('success');
-
-      // Déclencher le téléchargement réel
+      // Créer un lien de téléchargement
       const link = document.createElement('a');
-      link.href ={cv};
+      link.href = cv;
       link.download = 'Mouhamed_Bouzyane_CV.pdf';
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      
+      // Ajouter au DOM et déclencher le téléchargement
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-    }, 1500);
+      
+      // Attendre un peu pour simuler le téléchargement
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      setDownloadState('success');
+    } catch (error) {
+      console.error('Erreur lors du téléchargement:', error);
+      setDownloadState('idle');
+    }
   };
 
   // Données pour les onglets
@@ -65,16 +74,16 @@ const AboutSection = () => {
     ],
     experience: [
       {
-        title: 'Développeur Front-end Junior',
+        title: 'Développeur Web Full Stack Junior',
         company: 'Projet personnel de portfolio',
         period: '2023 - Présent',
         description: 'Création d\'un portfolio personnel en utilisant React, Tailwind CSS et des animations modernes pour mettre en valeur mes compétences et projets.',
       },
       {
-        title: 'Développeur Web Stagiaire',
-        company: 'Formation pratique',
-        period: '2023',
-        description: 'Développement de projets Web dans le cadre de la formation. Implémentation de fonctionnalités front-end et back-end avec des technologies modernes.',
+        title: 'Développeur Web Full Stack – LIADTECH',
+        company: 'LIADTECH',
+        period: '2025 – Présent',
+        description: 'Développement d’applications web avec la stack PERN (PostgreSQL, Express.js, React.js, Node.js) et mise en œuvre de fonctionnalités front-end et back-end.',
       },
     ],
     certifications: [
