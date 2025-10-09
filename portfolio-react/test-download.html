@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de téléchargement CV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .test-button {
+            background-color: #2563eb;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 20px;
+        }
+        .test-button:hover {
+            background-color: #1d4ed8;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        .error {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test de téléchargement du CV</h1>
+    <p>Ce test vérifie si le fichier CV peut être téléchargé correctement.</p>
+    
+    <button class="test-button" onclick="testDownload()">Tester le téléchargement</button>
+    
+    <div id="status"></div>
+    
+    <script>
+        function testDownload() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = '<div class="status">Test en cours...</div>';
+            
+            try {
+                // Créer un lien de téléchargement
+                const link = document.createElement('a');
+                link.href = '/Mouhamed_Bouzyane_CV.pdf';
+                link.download = 'Mouhamed_Bouzyane_CV.pdf';
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                
+                // Vérifier si le fichier existe
+                fetch('/Mouhamed_Bouzyane_CV.pdf', { method: 'HEAD' })
+                    .then(response => {
+                        if (response.ok) {
+                            // Ajouter au DOM et déclencher le téléchargement
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            
+                            statusDiv.innerHTML = '<div class="status success">✅ Téléchargement réussi ! Le fichier CV a été trouvé et le téléchargement a été déclenché.</div>';
+                        } else {
+                            statusDiv.innerHTML = '<div class="status error">❌ Erreur : Le fichier CV n\'a pas été trouvé (code: ' + response.status + ')</div>';
+                        }
+                    })
+                    .catch(error => {
+                        statusDiv.innerHTML = '<div class="status error">❌ Erreur : ' + error.message + '</div>';
+                    });
+            } catch (error) {
+                statusDiv.innerHTML = '<div class="status error">❌ Erreur lors du test : ' + error.message + '</div>';
+            }
+        }
+    </script>
+</body>
+</html>

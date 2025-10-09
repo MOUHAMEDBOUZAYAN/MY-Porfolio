@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import about from '../assets/images/about-me.jpg';
-import cv from '../assets/projects/Mouhamed_Bouzyane_CV.pdf';
+// Le CV sera chargé depuis le dossier public
 
 const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('education');
@@ -21,9 +21,12 @@ const AboutSection = () => {
     try {
       setDownloadState('downloading');
 
+      // Chemin vers le CV dans le dossier public
+      const cvPath = '/Mouhamed_Bouzyane_CV.pdf';
+      
       // Créer un lien de téléchargement
       const link = document.createElement('a');
-      link.href = cv;
+      link.href = cvPath;
       link.download = 'Mouhamed_Bouzyane_CV.pdf';
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
