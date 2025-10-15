@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser'
 const ContactSection = () => {
   // EmailJS Configuration (embedded directly)
   const EMAIL_CONFIG = {
-    serviceId: 'service_qede2b7',
+    serviceId: 'service_rgcn024',
     templateId: {
       admin: 'template_w8ltyde',        // Template for you to receive user info
       autoReply: 'template_z4f5cel'    // Template for user thank you message
@@ -35,10 +35,31 @@ const ContactSection = () => {
 
   // Initialize EmailJS
   useEffect(() => {
-    const initEmailJS = () => {
+    const initEmailJS = async () => {
       try {
-        emailjs.init(EMAIL_CONFIG.publicKey)
-        console.log('✅ EmailJS initialized successfully')
+        await emailjs.init(EMAIL_CONFIG.publicKey)
+        console.log('✅ EmailJS initialized successfully with public key:', EMAIL_CONFIG.publicKey)
+        console.log('📧 Service ID:', EMAIL_CONFIG.serviceId)
+        console.log('📝 Template IDs:', EMAIL_CONFIG.templateId)
+        
+        // Test EmailJS connection
+        try {
+          const testResult = await emailjs.send(
+            EMAIL_CONFIG.serviceId,
+            EMAIL_CONFIG.templateId.admin,
+            {
+              from_name: 'Test',
+              from_email: 'test@example.com',
+              subject: 'Test EmailJS Connection',
+              message: 'This is a test message to verify EmailJS is working.',
+              to_email: 'mohammedbouzi177@gmail.com',
+              to_name: 'Mouhamed Bouzayane'
+            }
+          )
+          console.log('✅ EmailJS test successful:', testResult)
+        } catch (testError) {
+          console.warn('⚠️ EmailJS test failed (this is normal if templates are not set up yet):', testError)
+        }
       } catch (error) {
         console.error('❌ EmailJS initialization error:', error)
       }
@@ -100,7 +121,14 @@ const ContactSection = () => {
       return { success: true, data: result }
     } catch (error) {
       console.error('❌ Admin email error:', error)
-      return { success: false, error: error.text || error.message }
+      console.error('❌ Error details:', {
+        status: error.status,
+        text: error.text,
+        message: error.message,
+        serviceId: EMAIL_CONFIG.serviceId,
+        templateId: EMAIL_CONFIG.templateId.admin
+      })
+      return { success: false, error: error.text || error.message || 'Erreur inconnue' }
     }
   }
 
@@ -145,7 +173,14 @@ const ContactSection = () => {
       return { success: true, data: result }
     } catch (error) {
       console.error('❌ User confirmation email error:', error)
-      return { success: false, error: error.text || error.message }
+      console.error('❌ Error details:', {
+        status: error.status,
+        text: error.text,
+        message: error.message,
+        serviceId: EMAIL_CONFIG.serviceId,
+        templateId: EMAIL_CONFIG.templateId.autoReply
+      })
+      return { success: false, error: error.text || error.message || 'Erreur inconnue' }
     }
   }
 

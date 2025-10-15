@@ -35,6 +35,18 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20;
   }
   
+  /* Correction pour le header fixe */
+  #home .section-container {
+    @apply pt-20 pb-16 sm:py-20;
+  }
+  
+  /* Sur desktop, moins de padding top */
+  @media (min-width: 768px) {
+    #home .section-container {
+      @apply pt-24 pb-20;
+    }
+  }
+  
   .section-title {
     @apply text-3xl md:text-4xl font-bold mb-6 text-secondary-900 dark:text-white relative inline-block;
   }

@@ -1,6 +1,7 @@
 // src/components/IntroAnimation.jsx
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import profile from '../assets/images/profile.png'
 
 const IntroAnimation = ({ onComplete }) => {
   const [progress, setProgress] = useState(0)
@@ -183,13 +184,13 @@ const IntroAnimation = ({ onComplete }) => {
             >
               {/* Logo principal animé */}
               <motion.div 
-                className="mb-8 flex justify-center"
+                className="mb-6 md:mb-8 flex justify-center"
                 initial={{ y: -30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
               >
                 <motion.div 
-                  className="relative w-32 h-32 flex items-center justify-center"
+                  className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 flex items-center justify-center"
                   animate={{ 
                     rotate: [0, 360],
                     scale: [1, 1.05, 1]
@@ -217,9 +218,9 @@ const IntroAnimation = ({ onComplete }) => {
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                   />
                   
-                  {/* Logo central */}
+                  {/* Photo de profil */}
                   <motion.div 
-                    className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl"
+                    className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl overflow-hidden relative"
                     animate={{ 
                       boxShadow: [
                         "0 0 20px rgba(59, 130, 246, 0.5)",
@@ -229,17 +230,34 @@ const IntroAnimation = ({ onComplete }) => {
                     }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    <span className="text-3xl font-bold text-white">MB</span>
+                    <motion.img
+                      src={profile}
+                      alt="Mouhamed Bouzyan"
+                      className="w-full h-full object-cover rounded-full"
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.6, duration: 0.8 }}
+                    />
+                    {/* Overlay avec gradient */}
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-600/30 rounded-full"
+                      animate={{ 
+                        opacity: [0.3, 0.1, 0.3]
+                      }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    />
                   </motion.div>
                 </motion.div>
               </motion.div>
               
               {/* Nom avec effet de révélation professionnel */}
               <motion.h1 
-                className="text-6xl md:text-7xl font-bold mb-6"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 px-4 text-center"
                 style={{ 
                   textShadow: "0 0 30px rgba(59, 130, 246, 0.5)",
-                  letterSpacing: "0.1em"
+                  letterSpacing: "0.05em",
+                  wordBreak: "break-word",
+                  overflowWrap: "break-word"
                 }}
                 initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0 }}
                 animate={{ 
@@ -255,13 +273,13 @@ const IntroAnimation = ({ onComplete }) => {
               
               {/* Titre professionnel avec animation */}
               <motion.div
-                className="h-12 overflow-hidden mb-8"
+                className="h-12 overflow-hidden mb-6 md:mb-8 px-4"
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "3rem", opacity: 1 }}
                 transition={{ delay: 1.5, duration: 0.8 }}
               >
                 <motion.p 
-                  className="text-2xl md:text-3xl text-slate-300 font-medium"
+                  className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-slate-300 font-medium text-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 2.0 }}
@@ -272,13 +290,13 @@ const IntroAnimation = ({ onComplete }) => {
 
               {/* Badge de spécialisation */}
               <motion.div
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 rounded-full backdrop-blur-sm"
+                className="inline-flex items-center px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 rounded-full backdrop-blur-sm mx-4"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 2.5, duration: 0.6 }}
               >
-                <span className="text-blue-400 mr-2">🚀</span>
-                <span className="text-slate-300 font-medium">React.js • Node.js • Modern Web</span>
+                <span className="text-blue-400 mr-2 text-sm md:text-base">🚀</span>
+                <span className="text-slate-300 font-medium text-xs sm:text-sm md:text-base">React.js • Node.js • Modern Web</span>
               </motion.div>
             </motion.div>
           )}

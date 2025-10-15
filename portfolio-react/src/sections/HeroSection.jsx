@@ -178,7 +178,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <span className="block">Mouhamed Bouzyane</span>
+              <span className="block">Mouhamed Bouzyan</span>
               <span className="text-primary-600 dark:text-primary-400 block mt-2">
                 <TypeAnimation
                   sequence={[
