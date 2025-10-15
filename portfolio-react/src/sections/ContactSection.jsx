@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser'
 const ContactSection = () => {
   // EmailJS Configuration (embedded directly)
   const EMAIL_CONFIG = {
-    serviceId: 'service_rgcn024',
+    serviceId: 'service_9wwgnxp',
     templateId: {
       admin: 'template_w8ltyde',        // Template for you to receive user info
       autoReply: 'template_z4f5cel'    // Template for user thank you message
@@ -42,24 +42,8 @@ const ContactSection = () => {
         console.log('📧 Service ID:', EMAIL_CONFIG.serviceId)
         console.log('📝 Template IDs:', EMAIL_CONFIG.templateId)
         
-        // Test EmailJS connection
-        try {
-          const testResult = await emailjs.send(
-            EMAIL_CONFIG.serviceId,
-            EMAIL_CONFIG.templateId.admin,
-            {
-              from_name: 'Test',
-              from_email: 'test@example.com',
-              subject: 'Test EmailJS Connection',
-              message: 'This is a test message to verify EmailJS is working.',
-              to_email: 'mohammedbouzi177@gmail.com',
-              to_name: 'Mouhamed Bouzayane'
-            }
-          )
-          console.log('✅ EmailJS test successful:', testResult)
-        } catch (testError) {
-          console.warn('⚠️ EmailJS test failed (this is normal if templates are not set up yet):', testError)
-        }
+        // EmailJS ready for use
+        console.log('✅ EmailJS is ready to send emails')
       } catch (error) {
         console.error('❌ EmailJS initialization error:', error)
       }

@@ -22,19 +22,35 @@ const AboutSection = () => {
       setDownloadState('downloading');
 
       // Chemin vers le CV dans le dossier public
-      const cvPath = '/Mouhamed_Bouzyane_CV.pdf';
+      const cvPath = '/Mohamed Bouzayan cv.pdf';
+      
+      // Vérifier d'abord si le fichier existe
+      const response = await fetch(cvPath, { method: 'HEAD' });
+      
+      if (!response.ok) {
+        throw new Error(`Fichier non trouvé: ${response.status}`);
+      }
+      
+      // Télécharger le fichier en tant que blob pour forcer le téléchargement
+      const fileResponse = await fetch(cvPath);
+      const blob = await fileResponse.blob();
+      
+      // Créer l'URL du blob
+      const blobUrl = window.URL.createObjectURL(blob);
       
       // Créer un lien de téléchargement
       const link = document.createElement('a');
-      link.href = cvPath;
+      link.href = blobUrl;
       link.download = 'Mouhamed_Bouzyane_CV.pdf';
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
+      link.style.display = 'none';
       
       // Ajouter au DOM et déclencher le téléchargement
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      
+      // Nettoyer l'URL du blob
+      window.URL.revokeObjectURL(blobUrl);
       
       // Attendre un peu pour simuler le téléchargement
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -43,6 +59,13 @@ const AboutSection = () => {
     } catch (error) {
       console.error('Erreur lors du téléchargement:', error);
       setDownloadState('idle');
+      
+      // Fallback: essayer d'ouvrir dans un nouvel onglet
+      try {
+        window.open('/Mohamed Bouzayan cv.pdf', '_blank');
+      } catch (fallbackError) {
+        console.error('Erreur de fallback:', fallbackError);
+      }
     }
   };
 
