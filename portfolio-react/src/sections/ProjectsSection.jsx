@@ -7,11 +7,14 @@ import portfolio from '../assets/projects/portfolio.jpg';
 import CookSecure from '../assets/images/CookSecure.jpg';
 import SecureAuth from '../assets/images/SecureAuth.png';
 import Météo from '../assets/images/Application Météo.jpeg';
-import music from '../assets/images/music player.jpeg';
 import Blog from '../assets/images/Blog.jpeg';
-import film from '../assets/images/Projetfilm.jpg'
-import Ecomerce from '../assets/images/E-Commerce-Dashboard.jpeg'
-import Dashboard from '../assets/images/Dashboard.png'
+import film from '../assets/images/Projetfilm.jpg';
+import Artisania from '../assets/images/Artisania.jpg';
+import Quize from '../assets/images/quize.jpg';
+import message from '../assets/images/message.png';
+import MusicApp from '../assets/images/musicApp.png';
+import Construction from '../assets/images/Construction.png';
+import Calculatrice from '../assets/images/Calculatrice.png';
 
 const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all')
@@ -40,24 +43,13 @@ const ProjectsSection = () => {
       technologies: ["React", "Tailwind CSS", "API REST", "Chart.js"],
       category: "frontend",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/weather-app",
-      liveLink: "#",
-      featured: true
-    },
-    {
-      id: 7,
-      title: "E-Commerce Dashboard",
-      description: "Interface utilisateur moderne pour une plateforme de commerce électronique avec gestion des produits et statistiques en temps réel.",
-      image: Ecomerce, 
-      technologies: ["React", "Redux", "Material UI", "Recharts"],
-      category: "frontend",
-      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/ecommerce-dashboard",
-      liveLink: "#",
+      liveLink: "https://app-weather1.netlify.app/",
       featured: false
     },
     {
       id: 8,
       title: "FilmExplorer ",
-      description: "Site vitrine pour photographe professionnel avec galerie interactive et animations fluides.",
+      description: "🎬 FilmFinder - Explorez le Monde du Cinéma FilmFinder est une application web moderne et élégante pour découvrir, rechercher et explorer des films. Conçue avec React et une interface utilisateur exceptionnelle, elle offre une expérience immersive pour tous les passionnés de cinéma.",
       image: film, 
       technologies: ["JavaScript", "REACT", "HTML5", "Tailwind CSS"],
       category: "frontend",
@@ -65,74 +57,30 @@ const ProjectsSection = () => {
       liveLink: "https://film-finder-demo.netlify.app/",
       featured: false
     },
-    {
-      id: 9,
-      title: "Dashboard Analytics",
-      description: "Tableau de bord d'analyse de données avec visualisations dynamiques et filtres interactifs.",
-      image: Dashboard, 
-      technologies: ["React", "D3.js", "Tailwind CSS", "TypeScript"],
-      category: "frontend",
-      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/analytics-dashboard",
-      liveLink: "#",
-      featured: false
-    }
   ]
   
-  // مشاريع الخلفية (Backend) - 4 مشاريع
+  // مشاريع الخلفية (Backend) - 1 مشروع
   const backendProjects = [
     {
-      id: 6,
-      title: "CookSecure-Site",
-      description: "API RESTful pour une application de commerce électronique, avec gestion des produits, commandes et utilisateurs.",
-      image: CookSecure,
-      technologies: ["Node.js", "Express", "MongoDB", "JWT"],
-      category: "backend",
-      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/CookSecure-Site",
-      liveLink: "https://cuisin-app.netlify.app/",
-      featured: false
-    },
-    {
       id: 10,
-      title: "API de Gestion des Utilisateurs",
-      description: "API robuste pour la gestion des utilisateurs, authentification et autorisations avec différents niveaux d'accès.",
-      image: music, 
-      technologies: ["Node.js", "Express", "MySQL", "JWT"],
+      title: "Calculatrice API",
+      description: "API backend robuste développée avec Node.js pour effectuer des calculs mathématiques complexes. Service RESTful permettant d'effectuer des opérations arithmétiques, trigonométriques, logarithmiques et statistiques avec une architecture modulaire et une gestion d'erreurs avancée. Optimisée pour la performance et la précision des calculs.",
+      image: Calculatrice, 
+      technologies: ["Node.js", "Express", "JavaScript", "Jest", "ESLint"],
       category: "backend",
-      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/user-management-api",
-      liveLink: "#",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/calculatrice.git",
+      liveLink: "https://github.com/MOUHAMEDBOUZAYAN/calculatrice.git",
       featured: false
     },
-    {
-      id: 11,
-      title: "Microservice de Paiement",
-      description: "Microservice pour le traitement sécurisé des paiements avec intégration Stripe et PayPal. (En cours de développement)",
-      image: music, 
-      technologies: ["Node.js", "Express", "Stripe API", "Docker"],
-      category: "backend",
-      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/payment-microservice",
-      liveLink: "#",
-      featured: false
-    },
-    {
-      id: 12,
-      title: "API de Notification",
-      description: "Service de notification en temps réel avec support pour emails, SMS et notifications push. (En cours de développement)",
-      image: music, 
-      technologies: ["Node.js", "Socket.IO", "Redis", "AWS SES"],
-      category: "backend",
-      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/notification-api",
-      liveLink: "#",
-      featured: false
-    }
   ]
   
-  // مشاريع الـ Fullstack - 3 مشاريع
+  // مشاريع الـ Fullstack - 8 مشاريع
   const fullstackProjects = [
     {
       id: 3,
       title: "Music-App--Project-file-Rouge",
       description: "Application de gestion de tâches avec fonctionnalités de drag-and-drop permettant aux utilisateurs d'organiser leurs tâches par statut et priorité. (En cours de développement)",
-      image: music,
+      image: MusicApp,
       technologies: ["React", "Node.js", "Express", "MongoDB"],
       category: "fullstack",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/Music-App--Project-file-Rouge-",
@@ -158,6 +106,61 @@ const ProjectsSection = () => {
       technologies: ["React", "Node.js", "MongoDB", "Express"],
       category: "fullstack",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/Projet-API-D-authentification",
+      liveLink: "#",
+      featured: false
+    },
+    {
+      id: 6,
+      title: "CookSecure-Site",
+      description: "Application complète de commerce électronique avec interface utilisateur moderne et API backend robuste pour la gestion des produits, commandes et utilisateurs.",
+      image: CookSecure,
+      technologies: ["React", "Node.js", "Express", "MongoDB", "JWT"],
+      category: "fullstack",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/CookSecure-Site",
+      liveLink: "https://cuisin-app.netlify.app/",
+      featured: false
+    },
+    {
+      id: 7,
+      title: "Artisania (E-Commerce Site)",
+      description: "Plateforme complète de commerce électronique avec interface utilisateur moderne, gestion des produits, statistiques en temps réel et système de commandes intégré.",
+      image: Artisania, 
+      technologies: ["React", "Redux", "Material UI", "Recharts", "Node.js", "Express"],
+      category: "fullstack",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/Artisania.git",
+      liveLink: "#",
+      featured: false
+    },
+    {
+      id: 9,
+      title: "Quize Game",
+      description: "Application de quiz interactive complète avec React + TypeScript, design moderne, animations Framer Motion, gestion de thèmes, système de score avancé et interface responsive. Backend intégré pour la gestion des scores.",
+      image: Quize, 
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "MongoDB"],
+      category: "fullstack",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/analytics-dashboard",
+      liveLink: "#",
+      featured: false
+    },
+    {
+      id: 11,
+      title: "Application-de-Messagerie",
+      description: "Application de messagerie complète en temps réel avec interface utilisateur moderne, chat en direct, notifications push, gestion des contacts et historique des conversations. Frontend développé avec React Native/Expo et backend robuste.",
+      image: message, 
+      technologies: ["React Native", "Expo Go", "Node.js", "Express", "Socket.IO", "MongoDB", "JWT"],
+      category: "fullstack",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/Application-de-Messagerie.git",
+      liveLink: "#",
+      featured: false
+    },
+    {
+      id: 12,
+      title: "Jury Blanc",
+      description: "Application web moderne pour optimiser et automatiser la gestion des jurys d'examen dans les établissements d'enseignement. Solution complète permettant aux administrateurs académiques de planifier efficacement les sessions d'évaluation, gérer les membres du jury et suivre l'ensemble du processus d'évaluation en temps réel. Interface intuitive pour la coordination des examens, notifications automatiques et génération de rapports détaillés.",
+      image: Construction, 
+      technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "JWT", "React Query"],
+      category: "fullstack",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/Jury-Blanc-.git",
       liveLink: "#",
       featured: false
     }
@@ -335,7 +338,7 @@ const ProjectsSection = () => {
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     onError={(e) => {
-                      e.target.src = music;
+                      e.target.src = MusicApp;
                       e.target.onerror = null;
                     }}
                   />
