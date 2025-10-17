@@ -138,7 +138,7 @@ const ProjectsSection = () => {
       image: Quize, 
       technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "MongoDB"],
       category: "fullstack",
-      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/analytics-dashboard",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/Application-de-Quiz.git",
       liveLink: "#",
       featured: false
     },
@@ -150,7 +150,7 @@ const ProjectsSection = () => {
       technologies: ["React Native", "Expo Go", "Node.js", "Express", "Socket.IO", "MongoDB", "JWT"],
       category: "fullstack",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/Application-de-Messagerie.git",
-      liveLink: "#",
+      liveLink: "https://github.com/MOUHAMEDBOUZAYAN/Application-de-Messagerie.git",
       featured: false
     },
     {
@@ -161,7 +161,7 @@ const ProjectsSection = () => {
       technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "JWT", "React Query"],
       category: "fullstack",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/Jury-Blanc-.git",
-      liveLink: "#",
+      liveLink: "https://constructionxpert.netlify.app",
       featured: false
     }
   ]

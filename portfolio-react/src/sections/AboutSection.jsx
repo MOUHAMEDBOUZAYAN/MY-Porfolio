@@ -80,20 +80,20 @@ const AboutSection = () => {
   const tabContents = {
     education: [
       {
-        degree: 'Formation JavaScript',
+        degree: 'Formation Full Stack JavaScript',
         institution: 'École Numérique Ahmed El Hansali (Partenariat avec Simplon)',
-        period: '2023 - En cours',
-        description: 'Formation intensive en développement web avec spécialisation JavaScript et React. Apprentissage des pratiques modernes de développement et réalisation de projets concrets.',
+        period: 'Novembere 2024 - Juillet 2025',
+        description: 'Formation intensive en développement web Full Stack avec spécialisation MERN et PERN stack (MongoDB/PostgreSQL, Express.js, React.js, Node.js). Apprentissage des pratiques modernes de développement et réalisation de projets concrets.',
       },
       {
-        degree: 'Deug en Biologie, chimie, géologie',
+        degree: 'Bac+1 en Biologie, Chimie, Géologie',
         institution: 'Faculté des sciences et des techniques, Beni Mellal',
         period: '2022 - 2024',
         description: 'Formation scientifique pluridisciplinaire, développant rigueur analytique et méthodologie de résolution de problèmes complexes.',
       },
       {
-        degree: 'Baccalauréat en Science Physique',
-        institution: 'Lycée Moulay Rchid, Kasbat-Tadla',
+        degree: 'Baccalauréat en Sciences Physiques',
+        institution: 'Lycée Moulay Rachid, Kasbat-Tadla',
         period: '2021 - 2022',
         description: 'Formation scientifique avec spécialisation en physique, menant à l\'acquisition de compétences analytiques et mathématiques.',
       },
@@ -106,18 +106,36 @@ const AboutSection = () => {
         description: 'Création d\'un portfolio personnel en utilisant React, Tailwind CSS et des animations modernes pour mettre en valeur mes compétences et projets.',
       },
       {
-        title: 'Développeur Web Full Stack – LIADTECH',
-        company: 'LIADTECH',
-        period: '2025 – Présent',
+        title: 'Développeur Web Full Stack',
+        company: 'Liadtech',
+        period: 'Août 2025 - Octobre 2025',
         description: 'Développement d’applications web avec la stack PERN (PostgreSQL, Express.js, React.js, Node.js) et mise en œuvre de fonctionnalités front-end et back-end.',
       },
     ],
     certifications: [
       {
-        name: 'Formation JavaScript & React',
-        issuer: 'École Numérique Ahmed El Hansali',
-        date: '2023 - En cours',
-        description: 'Certification en cours dans le développement d\'applications web modernes avec JavaScript, React et Node.js.',
+        name: 'JavaScript (Intermediate)',
+        issuer: 'HackerRank',
+        date: 'Juin 2025',
+        description: 'Validation des compétences en gestion de la mémoire, modèle de concurrence, boucle d\'événements, et résolution de problèmes en JavaScript.',
+      },
+      {
+        name: 'Node.js (Intermediate)',
+        issuer: 'HackerRank',
+        date: 'Juin 2025',
+        description: 'Évaluation des connaissances en programmation orientée événement, développement backend, et gestion de la concurrence avec Node.js.',
+      },
+      {
+        name: 'REST API (Intermediate)',
+        issuer: 'HackerRank',
+        date: 'Juin 2025',
+        description: 'Certification couvrant la conception et le développement d\'API RESTful, incluant méthodes HTTP, tests API, et services web.',
+      },
+      {
+        name: 'Frontend Developer (React)',
+        issuer: 'HackerRank',
+        date: 'Juillet 2025',
+        description: 'Validation des compétences en React.js, JavaScript ES6+, Tailwind CSS, et développement d\'interfaces modernes et réactives.',
       },
     ],
   };

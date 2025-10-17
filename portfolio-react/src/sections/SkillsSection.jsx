@@ -223,6 +223,15 @@ const SkillsSection = () => {
       experience: 'Extensions, linting, formatage et personnalisation pour une productivité maximale',
       tags: ['Extensions', 'Linting', 'Snippets', 'Productivity']
     },
+    { 
+      name: 'Azure DevOps', 
+      level: 70, 
+      category: 'devops', 
+      icon: '☁️',
+      description: 'Plateforme de développement et déploiement cloud Microsoft',
+      experience: 'Gestion de projets, pipelines CI/CD, intégration continue et déploiement avec Azure DevOps',
+      tags: ['Pipelines', 'Boards', 'Repos', 'Test Plans', 'Artifacts']
+    },
     
     // Compétences relationnelles
     { 
