@@ -548,17 +548,17 @@ const SkillsSection = () => {
                   {/* Info-bulle au survol */}
                   {hoveredCategory === category.id && category.id !== activeCategory && (
                     <motion.div 
-                      className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 rounded text-xs w-max max-w-[200px] ${
+                      className={`absolute top-1/2 left-full transform -translate-y-1/2 ml-3 px-3 py-2 rounded text-xs w-max max-w-[200px] ${
                         theme === 'light' 
                           ? 'bg-secondary-800 text-white' 
                           : 'bg-secondary-700 text-white'
-                      } shadow-lg z-10`}
-                      initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ duration: 0.2 }}
+                      } shadow-lg z-50`}
+                      initial={{ opacity: 0, x: -10, scale: 0.95 }}
+                      animate={{ opacity: 1, x: 0, scale: 1 }}
+                      transition={{ duration: 0.15 }}
                     >
                       {category.description}
-                      <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rotate-45 ${
+                      <div className={`absolute -left-1 top-1/2 transform -translate-y-1/2 w-2 h-2 rotate-45 ${
                         theme === 'light' ? 'bg-secondary-800' : 'bg-secondary-700'
                       }`}></div>
                     </motion.div>
