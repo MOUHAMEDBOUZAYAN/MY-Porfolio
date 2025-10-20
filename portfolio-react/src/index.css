@@ -7,6 +7,12 @@
   html {
     scroll-behavior: smooth;
   }
+  /* Empêche les transitions globales lors du changement de thème pour éviter le flicker */
+  .disable-theme-transitions *,
+  .disable-theme-transitions *::before,
+  .disable-theme-transitions *::after {
+    transition: none !important;
+  }
   
   body {
     @apply font-sans;

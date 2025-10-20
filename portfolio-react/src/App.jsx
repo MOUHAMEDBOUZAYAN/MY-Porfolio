@@ -73,7 +73,7 @@ function AppContent() {
       </AnimatePresence>
       
       {/* Contenu principal du site */}
-      <div className={`light transition-all duration-500 ${showIntro ? 'opacity-0' : 'opacity-100'}`}>
+      <div className={`transition-opacity duration-500 ${showIntro ? 'opacity-0' : 'opacity-100'}`}>
         <Navbar />
         <main>
           <HeroSection />

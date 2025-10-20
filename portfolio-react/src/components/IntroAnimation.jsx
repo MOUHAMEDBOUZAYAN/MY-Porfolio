@@ -267,7 +267,7 @@ const IntroAnimation = ({ onComplete }) => {
                 transition={{ duration: 1.2, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
               >
                 <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500 bg-clip-text text-transparent">
-                  Mouhamed.Bouzyane
+                  Mouhamed.Bouzyan
                 </span>
               </motion.h1>
               

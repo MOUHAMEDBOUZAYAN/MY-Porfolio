@@ -12,8 +12,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Fira Code pour les blocs de code -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = stored ? stored : (prefersDark ? 'dark' : 'light');
+          var root = document.documentElement;
+          root.classList.remove('light', 'dark');
+          root.classList.add(theme);
+        } catch (e) {
+          // en cas d'erreur, ne rien faire
+        }
+      })();
+    </script>
   </head>
-  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

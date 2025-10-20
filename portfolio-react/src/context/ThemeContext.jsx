@@ -28,8 +28,15 @@ export const ThemeProvider = ({ children }) => {
   // Update theme in state and localStorage
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light'
+    // Désactiver temporairement les transitions pour éviter le flash
+    const root = window.document.documentElement
+    root.classList.add('disable-theme-transitions')
     setTheme(newTheme)
     localStorage.setItem('theme', newTheme)
+    // Retirer la désactivation après le prochain frame
+    window.requestAnimationFrame(() => {
+      root.classList.remove('disable-theme-transitions')
+    })
   }
   
   // Apply theme class to document when theme changes
