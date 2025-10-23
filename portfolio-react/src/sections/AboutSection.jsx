@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import about from '../assets/images/about-me.jpg';
+import LiadtechLogo from '../assets/projects/Liadtech.png';
+import TythonLogo from '../assets/projects/Tython.png';
 // Le CV sera chargé depuis le dossier public
 
 const AboutSection = () => {
@@ -100,6 +102,13 @@ const AboutSection = () => {
     ],
     experience: [
       {
+        title: 'Développeur Web Full Stack',
+        company: 'Tython',
+        period: 'Octobre 2025 - Présent',
+        description: 'Participation au développement et à la maintenance d\'applications web modernes en utilisant les stacks MERN et PERN. Développement front-end avec React.js et intégration responsive avec Tailwind CSS. Travail en équipe agile pour la création de solutions web performantes et évolutives.',
+        logo: TythonLogo,
+      },
+      {
         title: 'Développeur Web Full Stack Junior',
         company: 'Projet personnel de portfolio',
         period: '2023 - Présent',
@@ -109,7 +118,8 @@ const AboutSection = () => {
         title: 'Développeur Web Full Stack',
         company: 'Liadtech',
         period: 'Août 2025 - Octobre 2025',
-        description: 'Développement d’applications web avec la stack PERN (PostgreSQL, Express.js, React.js, Node.js) et mise en œuvre de fonctionnalités front-end et back-end.',
+        description: 'Développement d\'applications web avec la stack PERN (PostgreSQL, Express.js, React.js, Node.js) et mise en œuvre de fonctionnalités front-end et back-end.',
+        logo: LiadtechLogo,
       },
     ],
     certifications: [
@@ -653,7 +663,16 @@ const AboutSection = () => {
                         }}
                       >
                         <h4 className="text-lg font-bold text-secondary-900 dark:text-white">{item.title}</h4>
-                        <p className="text-primary-600 dark:text-primary-400 font-medium">{item.company}</p>
+                        <div className="flex items-center gap-3">
+                          {item.logo && (
+                            <img 
+                              src={item.logo} 
+                              alt={`Logo ${item.company}`}
+                              className="w-8 h-8 object-contain rounded"
+                            />
+                          )}
+                          <p className="text-primary-600 dark:text-primary-400 font-medium">{item.company}</p>
+                        </div>
                         <p className="text-sm text-secondary-500 dark:text-secondary-400 mb-3">{item.period}</p>
                         <p className="
 
