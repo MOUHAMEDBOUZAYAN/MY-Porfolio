@@ -57,6 +57,17 @@ const ProjectsSection = () => {
       liveLink: "https://film-finder-demo.netlify.app/",
       featured: false
     },
+    {
+      id: 9,
+      title: "Quiz Game",
+      description: "Application de quiz interactive avec React + TypeScript, design moderne, animations Framer Motion, gestion de thèmes, système de score avancé et interface responsive. Interface utilisateur intuitive pour des expériences de quiz engageantes.",
+      image: Quize, 
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      category: "frontend",
+      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/Application-de-Quiz.git",
+      liveLink: "#",
+      featured: false
+    },
   ]
   
   // مشاريع الخلفية (Backend) - 1 مشروع
@@ -128,17 +139,6 @@ const ProjectsSection = () => {
       technologies: ["React", "Redux", "Material UI", "Recharts", "Node.js", "Express"],
       category: "fullstack",
       githubLink: "https://github.com/MOUHAMEDBOUZAYAN/Artisania.git",
-      liveLink: "#",
-      featured: false
-    },
-    {
-      id: 9,
-      title: "Quize Game",
-      description: "Application de quiz interactive complète avec React + TypeScript, design moderne, animations Framer Motion, gestion de thèmes, système de score avancé et interface responsive. Backend intégré pour la gestion des scores.",
-      image: Quize, 
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "MongoDB"],
-      category: "fullstack",
-      githubLink: "https://github.com/MOUHAMEDBOUZAYAN/Application-de-Quiz.git",
       liveLink: "#",
       featured: false
     },
