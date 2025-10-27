@@ -82,7 +82,7 @@ const ContactSection = () => {
         message: formData.message,
         
         // System information
-        sent_date: new Date().toLocaleDateString('fr-FR', {
+        date: new Date().toLocaleDateString('fr-FR', {
           year: 'numeric',
           month: 'long',
           day: 'numeric',

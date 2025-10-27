@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import about from '../assets/images/about-me.jpg';
 import LiadtechLogo from '../assets/projects/Liadtech.png';
 import TythonLogo from '../assets/projects/Tython.png';
+import EnaaLogo from '../assets/projects/Enaa.png';
 // Le CV sera chargé depuis le dossier public
 
 const AboutSection = () => {
@@ -86,6 +87,7 @@ const AboutSection = () => {
         institution: 'École Numérique Ahmed El Hansali (Partenariat avec Simplon)',
         period: 'Novembere 2024 - Juillet 2025',
         description: 'Formation intensive en développement web Full Stack avec spécialisation MERN et PERN stack (MongoDB/PostgreSQL, Express.js, React.js, Node.js). Apprentissage des pratiques modernes de développement et réalisation de projets concrets.',
+        logo: EnaaLogo,
       },
       {
         degree: 'Bac+1 en Biologie, Chimie, Géologie',
@@ -605,7 +607,16 @@ const AboutSection = () => {
                         }}
                       >
                         <h4 className="text-lg font-bold text-secondary-900 dark:text-white">{item.degree}</h4>
-                        <p className="text-primary-600 dark:text-primary-400 font-medium">{item.institution}</p>
+                        <div className="flex items-center gap-3">
+                          {item.logo && (
+                            <img 
+                              src={item.logo} 
+                              alt={`Logo ${item.institution}`}
+                              className="w-8 h-8 object-contain rounded"
+                            />
+                          )}
+                          <p className="text-primary-600 dark:text-primary-400 font-medium">{item.institution}</p>
+                        </div>
                         <p className="text-sm text-secondary-500 dark:text-secondary-400 mb-3">{item.period}</p>
                         <p className="text-secondary-600 dark:text-secondary-300">{item.description}</p>
                       </motion.div>

@@ -37,7 +37,7 @@ export const sendEmailToAdmin = async (formData) => {
       message: formData.message,
       
       // Informations système
-      sent_date: new Date().toLocaleDateString('fr-FR', {
+      date: new Date().toLocaleDateString('fr-FR', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
