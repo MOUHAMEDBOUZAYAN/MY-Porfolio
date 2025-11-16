@@ -182,16 +182,20 @@ const HeroSection = () => {
               <span className="text-primary-600 dark:text-primary-400 block mt-2">
                 <TypeAnimation
                   sequence={[
-                    'Développeur Frontend', 
+                    'Développeur Frontend',
                     2000,
-                    'Développeur React.js', 
+                    'Développeur React.js',
                     2000,
-                    'Développeur Full Stack', 
+                    'Développeur Backend',
+                    2000,
+                    'Développeur Full Stack',
                     2000
                   ]}
                   wrapper="span"
                   cursor={true}
                   repeat={Infinity}
+                  speed={50}
+                  deletionSpeed={50}
                 />
               </span>
             </motion.h1>
@@ -274,25 +278,13 @@ const HeroSection = () => {
             ))}
             
             <motion.div 
-              className="w-72 h-72 md:w-96 md:h-96 bg-white dark:bg-secondary-800 rounded-full shadow-xl flex items-center justify-center overflow-hidden relative z-10"
-              whileHover={{ boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" }}
+              className="w-72 h-72 md:w-96 md:h-96 flex items-center justify-center relative z-10"
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/30 rounded-full z-0"
-                animate={{ 
-                  rotate: [0, 360],
-                }}
-                transition={{ 
-                  duration: 20, 
-                  repeat: Infinity, 
-                  ease: "linear"
-                }}
-              />
-              
               <img
                 src={profile}
                 alt="Photo de Mouhamed Bouzyane"
-                className="w-full h-full object-cover relative z-10"
+                className="w-full h-full object-contain pointer-events-none select-none drop-shadow-2xl"
+                style={{ backgroundColor: 'transparent' }}
               />
             </motion.div>
           </motion.div>

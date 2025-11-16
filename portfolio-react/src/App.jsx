@@ -1,6 +1,7 @@
 // src/App.jsx
 import { useEffect, useState } from 'react'
-import Navbar from './components/Navbar'
+import GooeyNav from './components/GooeyNav'
+import ThemeToggle from './components/ThemeToggle'
 import HeroSection from './sections/HeroSection'
 import AboutSection from './sections/AboutSection'
 import SkillsSection from './sections/SkillsSection'
@@ -74,7 +75,22 @@ function AppContent() {
       
       {/* Contenu principal du site */}
       <div className={`transition-opacity duration-500 ${showIntro ? 'opacity-0' : 'opacity-100'}`}>
-        <Navbar />
+        <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between text-secondary-800 dark:text-white">
+            <GooeyNav
+              items={[
+                { label: 'Accueil', href: '#home' },
+                { label: 'À propos', href: '#about' },
+                { label: 'Compétences', href: '#skills' },
+                { label: 'Projets', href: '#projects' },
+                { label: 'Contact', href: '#contact' },
+              ]}
+            />
+            <div className="ml-4">
+              <ThemeToggle />
+            </div>
+          </div>
+        </header>
         <main>
           <HeroSection />
           <AboutSection />

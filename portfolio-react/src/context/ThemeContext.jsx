@@ -1,5 +1,5 @@
 // src/context/ThemeContext.jsx
-import { createContext, useState, useContext, useEffect } from 'react'
+import { createContext, useState, useContext, useEffect, useLayoutEffect } from 'react'
 import React from 'react'
 
 // Create context
@@ -39,8 +39,8 @@ export const ThemeProvider = ({ children }) => {
     })
   }
   
-  // Apply theme class to document when theme changes
-  useEffect(() => {
+  // Apply theme class to document when theme changes (before paint to éviter flash)
+  useLayoutEffect(() => {
     const root = window.document.documentElement
     
     // Remove previous class
