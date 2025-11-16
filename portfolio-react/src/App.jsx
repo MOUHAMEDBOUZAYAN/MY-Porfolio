@@ -9,6 +9,7 @@ import ProjectsSection from './sections/ProjectsSection'
 import ContactSection from './sections/ContactSection'
 import Footer from './components/Footer'
 import IntroAnimation from './components/IntroAnimation'
+import SplashCursor from './components/SplashCursor'
 import { ThemeProvider } from './context/ThemeContext'
 import { AnimatePresence } from 'framer-motion'
 import React from 'react'
@@ -75,6 +76,8 @@ function AppContent() {
       
       {/* Contenu principal du site */}
       <div className={`transition-opacity duration-500 ${showIntro ? 'opacity-0' : 'opacity-100'}`}>
+        {/* Effet global d'arrière-plan (fluid cursor) */}
+        <SplashCursor TRANSPARENT={true} SHADING={true} />
         <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between text-secondary-800 dark:text-white">
             <GooeyNav
