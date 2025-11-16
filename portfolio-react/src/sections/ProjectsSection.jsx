@@ -1,6 +1,7 @@
 // src/sections/ProjectsSection.jsx
 import { useState, useEffect, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
+import ChromaGrid from '../components/ChromaGrid'
 
 // استيراد صور المشاريع الحالية
 import portfolio from '../assets/projects/portfolio.jpg';
@@ -312,7 +313,7 @@ const ProjectsSection = () => {
           </div>
         </motion.div>
         
-        {/* مشاريع - تحسين التحريكات */}
+        {/* Grille de projets - version originale avec effet spotlight léger */}
         <AnimatePresence mode="wait">
           <motion.div 
             key={activeCategory}
@@ -327,11 +328,27 @@ const ProjectsSection = () => {
                 key={project.id}
                 className="group relative rounded-xl overflow-hidden shadow-lg bg-white dark:bg-secondary-800 transform transition-all duration-300 flex flex-col h-full"
                 onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
+                onMouseLeave={(e) => {
+                  setHoveredProject(null)
+                  e.currentTarget.style.removeProperty('--mx')
+                  e.currentTarget.style.removeProperty('--my')
+                }}
+                onMouseMove={(e) => {
+                  const r = e.currentTarget.getBoundingClientRect()
+                  e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`)
+                  e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`)
+                }}
                 variants={projectVariants}
                 whileHover={{ y: -10, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
               >
-                {/* صورة المشروع */}
+                {/* Effet spotlight */}
+                <div
+                  className="pointer-events-none absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: 'radial-gradient(circle 240px at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.14), rgba(255,255,255,0.06) 35%, transparent 60%)'
+                  }}
+                />
+                {/* Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={project.image}
@@ -342,8 +359,6 @@ const ProjectsSection = () => {
                       e.target.onerror = null;
                     }}
                   />
-                  
-                  {/* شارة "Featured" للمشاريع المميزة */}
                   {project.featured && (
                     <motion.div 
                       className="absolute top-3 right-3 bg-accent-500 text-white text-xs font-bold px-3 py-1 rounded-full"
@@ -354,8 +369,6 @@ const ProjectsSection = () => {
                       Featured
                     </motion.div>
                   )}
-                  
-                  {/* Overlay */}
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4"
                     initial={{ opacity: 0 }}
@@ -390,18 +403,14 @@ const ProjectsSection = () => {
                     </div>
                   </motion.div>
                 </div>
-                
-                {/* معلومات المشروع */}
+                {/* Infos */}
                 <div className="p-6 flex flex-col flex-grow">
                   <h3 className="text-xl font-bold text-secondary-900 dark:text-white mb-2">
                     {project.title}
                   </h3>
-                  
                   <p className="text-secondary-600 dark:text-secondary-300 mb-4 min-h-[80px] flex-grow">
                     {project.description}
                   </p>
-                  
-                  {/* التقنيات */}
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.technologies.slice(0, 4).map((tech, index) => (
                       <span
@@ -417,8 +426,6 @@ const ProjectsSection = () => {
                       </span>
                     )}
                   </div>
-                  
-                  {/* الروابط - الحل النهائي لمشكلة المحاذاة */}
                   <div className="grid grid-cols-2 gap-4 mt-auto">
                     <a
                       href={project.githubLink}

@@ -27,6 +27,14 @@ function App() {
 function AppContent() {
   // État pour contrôler l'animation d'introduction
   const [showIntro, setShowIntro] = useState(true)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const navItems = [
+    { label: 'Accueil', href: '#home' },
+    { label: 'À propos', href: '#about' },
+    { label: 'Compétences', href: '#skills' },
+    { label: 'Projets', href: '#projects' },
+    { label: 'Contact', href: '#contact' },
+  ]
   
   // Configurer l'observateur d'intersection pour les animations au défilement
   useEffect(() => {
@@ -80,20 +88,71 @@ function AppContent() {
         <SplashCursor TRANSPARENT={true} SHADING={true} />
         <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between text-secondary-800 dark:text-white">
-            <GooeyNav
-              items={[
-                { label: 'Accueil', href: '#home' },
-                { label: 'À propos', href: '#about' },
-                { label: 'Compétences', href: '#skills' },
-                { label: 'Projets', href: '#projects' },
-                { label: 'Contact', href: '#contact' },
-              ]}
-            />
-            <div className="ml-4">
+            {/* Brand on mobile, full nav on desktop */}
+            <a href="#home" className="md:hidden font-bold text-lg">
+              Accueil
+            </a>
+            <div className="hidden md:block">
+              <GooeyNav
+                items={navItems}
+              />
+            </div>
+            <div className="ml-4 flex items-center gap-2">
               <ThemeToggle />
+              {/* Bouton menu mobile */}
+              <button
+                aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+                className="md:hidden p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+                onClick={() => setMobileOpen(v => !v)}
+              >
+                {mobileOpen ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
             </div>
           </div>
         </header>
+        {/* Drawer mobile */}
+        {mobileOpen && (
+          <>
+            <div
+              className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[1px] md:hidden"
+              onClick={() => setMobileOpen(false)}
+            />
+            <aside className="fixed top-0 right-0 z-50 h-full w-72 bg-white dark:bg-secondary-900 border-l border-black/10 dark:border-white/10 shadow-xl md:hidden">
+              <div className="p-4 flex items-center justify-between border-b border-black/10 dark:border-white/10">
+                <span className="font-semibold text-secondary-800 dark:text-white">Menu</span>
+                <button
+                  aria-label="Fermer"
+                  className="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <nav className="p-4 space-y-1">
+                {navItems.map(item => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="block px-3 py-2 rounded-md text-secondary-700 dark:text-secondary-200 hover:bg-secondary-100 dark:hover:bg-secondary-800"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+            </aside>
+          </>
+        )}
         <main>
           <HeroSection />
           <AboutSection />
